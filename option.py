@@ -90,11 +90,11 @@ parser.add_argument('--gt_init_epochs', type=int, default=20,
                     help='The number of ground truth init epochs')
 parser.add_argument('--num_epochs', type=int, default=130,
                     help='The number of training epochs')
-parser.add_argument('--print_every', type=int, default=50,
+parser.add_argument('--print_every_batch', type=int, default=50,
                     help='Print period')
-parser.add_argument('--save_every', type=int, default=5,
+parser.add_argument('--save_every_epoch', type=int, default=5,
                     help='Save period')
-parser.add_argument('--val_every', type=int, default=5,
+parser.add_argument('--val_every_epoch', type=int, default=5,
                     help='Validation period')
 parser.add_argument('--gt_ref', type=str2bool, default=True,
                     help='Whether to use ground truth images as references ')
@@ -102,7 +102,7 @@ parser.add_argument('--gt_ref', type=str2bool, default=True,
 ### evaluate / test / fine tune setting
 parser.add_argument('--continue_training', type=str2bool, default=False,
                     help='whether to load previous training model to continue training')
-parser.add_argument('--eval', type=str2bool, default=True,
+parser.add_argument('--eval', type=str2bool, default=False,
                     help='Evaluation mode')
 parser.add_argument('--eval_save_results', type=str2bool, default=False,
                     help='Save each image during evaluation')

@@ -29,10 +29,8 @@ class Logger(object):
 
     def get_log(self):
         return self.__logger
-    
-    # def info0(self, s):
-    #     if dist.get_rank == 0:
-    #         self.info(s)
+
+        
 
 
 def mkExpDir(args):

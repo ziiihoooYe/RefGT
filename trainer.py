@@ -161,7 +161,7 @@ class Trainer:
         self.scheduler.step()
 
         ### log info
-        if dist.get_rank == 0:
+        if dist.get_rank() == 0:
             self.logger.info('Current epoch: %d' % current_epoch)
             self.logger.info('Current epoch learning rate: %e' % (self.optimizer.param_groups[1]['lr']))
 
@@ -196,6 +196,8 @@ class Trainer:
                 loss = self.loss.init_loss(dr, cl_img)
             else:
                 loss = self.loss.loss(dr, cl_img)
+                
+            dist.barrier()
 
             loss.backward()
             self.optimizer.step()
@@ -221,21 +223,21 @@ class Trainer:
         
 
         ### print epoch matrics
-        if dist.get_rank == 0:
+        if dist.get_rank() == 0:
             self.logger.info('epoch: ' + str(current_epoch) + '\t DRTT PSNR' + str(_psnr) + '\t DRTT SSIM' + str(_ssim))
             self.logger.info('epoch: ' + str(current_epoch) + '\t Baseline PSNR' + str(_psnr_baseline) + '\t Baseline SSIM' + str(_ssim_baseline))
 
         ### save model
-        if current_epoch % self.args.save_every == 0:
-            if dist.get_rank == 0:   
-                self.logger.info('saving the model...')
-                tmp = self.model.state_dict()
-                model_state_dict = {key: tmp[key] for key in tmp if
-                                    (('SearchNet' not in key) and ('_copy' not in key))}
-                model_dir = os.path.join(self.args.save_dir, 'model')
-                if not os.path.exists(model_dir):
-                    os.makedirs(model_dir)
-                torch.save(model_state_dict, os.path.join(model_dir, 'model_' + str(current_epoch).zfill(5) + '.pt'))
+        if (current_epoch % self.args.save_every == 0) and (dist.get_rank() == 0):
+            self.logger.info('saving the model...')
+            tmp = self.model.state_dict()
+            model_state_dict = {key: tmp[key] for key in tmp if
+                                (('SearchNet' not in key) and ('_copy' not in key))}
+            model_dir = os.path.join(self.args.save_dir, 'model')
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir)
+            torch.save(model_state_dict, os.path.join(model_dir, 'model_' + str(current_epoch).zfill(5) + '.pt'))
+        
 
 
     def evaluate(self, current_epoch=0):
@@ -259,7 +261,7 @@ class Trainer:
 
                 ### mark down epoch matrics (PSNR, SSIM)
                 _psnr, _ssim = matrics.matrics_update(_psnr, _ssim, i_batch+1, dr.detach(), cl_img.detach())
-                _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr.detach(), cl_img.detach())
+                _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr_img.detach(), cl_img.detach())
 
                 if self.args.eval_save_results:
                     result_dir = os.path.join(self.args.save_dir, 'results', 'evaluation_result')
@@ -275,7 +277,7 @@ class Trainer:
                     rn_ref = narrow_img(rn_ref, ref_sizes)
                     cl_ref = narrow_img(cl_ref, ref_sizes)
 
-                    if dist.get_rank():
+                    if dist.get_rank() == 0:
                         for i in range(len(cl_img)):
                             img_save(rn_img=rn_img[i], cl_img=cl_img[i], cl_ref=cl_ref[i], dr_img=dr_img[i], dr=dr[i],
                                      save_dir=os.path.join(result_dir,str(i_batch * self.args.batch_size + i).zfill(5) + '.png'))
@@ -297,6 +299,8 @@ class Trainer:
                                     self.max_ssim_epoch))
         if dist.get_rank() == 0:
             self.logger.info('Evaluation over.')
+        
+        dist.barrier()
 
     def test(self):
         ### test begin
