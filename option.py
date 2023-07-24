@@ -12,10 +12,8 @@ def str2bool(v):
 parser = argparse.ArgumentParser(description='DRTT')
 
 ### log setting
-parser.add_argument('--save_dir', type=str, default='results_ppt',
+parser.add_argument('--save_dir', type=str, default='save_temp',
                     help='Directory to save log, arguments, models and images')
-parser.add_argument('--reset', type=str2bool, default=True,
-                    help='Delete save_dir to create a new one')
 parser.add_argument('--log_file_name', type=str, default='DRTT.log',
                     help='Log file name')
 parser.add_argument('--logger_name', type=str, default='DRTT',
@@ -24,13 +22,14 @@ parser.add_argument('--logger_name', type=str, default='DRTT',
 ### device setting
 parser.add_argument('--cpu', type=str2bool, default=False,
                     help='Use CPU to run code')
-parser.add_argument('--num_gpu', type=int, default=7,                                                                   ### baseline gpu index
+parser.add_argument('--num_gpu', type=int, default=8,                             
+                    ### baseline gpu index
                     help='The number of GPU used in training')
 
 ### dataset setting
-parser.add_argument('--dataset', type=str, default='BDD100K',                                                          ############### dataset name
+parser.add_argument('--dataset', type=str, default='BDD100K',                                                          
                     help='Which dataset to train and test')
-parser.add_argument('--dataset_dir', type=str, default='data',                                                          ############### dataset directory
+parser.add_argument('--dataset_dir', type=str, default='data',                                                         
                     help='Directory of dataset')
 
 ### dataloader setting
@@ -49,15 +48,13 @@ parser.add_argument('--n_feats', type=int, default=64,
 parser.add_argument('--res_scale', type=float, default=1.,
                     help='Residual scale')
 
-### backbone setting
-parser.add_argument('--backbone', type=str, default='PReNet',                                                           ############### backbone name
-                    help='Backbone name')
-parser.add_argument('--backbone_module', type=str, default='baseline.model.PReNet.networks',
-                    help='Backbone model directory')
-parser.add_argument('--backbone_state_dir', type=str, default='baseline/state_dict/PReNet6/BDD100K',                   ############### backbone directory
-                    help='Backbone state dic')
-parser.add_argument('--backbone_device', type=str, default='cuda:1',                                                    ### baseline gpu index
-                    help='Backbone device')
+### baseline setting
+parser.add_argument('--baseline', type=str, default='PReNet',                                                           
+                    help='baseline name')
+parser.add_argument('--baseline_module', type=str, default='baseline.model.PReNet.networks',
+                    help='baseline model directory')
+parser.add_argument('--baseline_state_dir', type=str, default='baseline/state_dict/PReNet6/BDD100K/net_latest.pth',                   
+                    help='baseline state dic')
 
 ### optimizer setting
 parser.add_argument('--beta1', type=float, default=0.9,
@@ -85,16 +82,15 @@ parser.add_argument('--ms_ssim_l1_loss', type=str2bool, default=True,
 parser.add_argument('--rec_loss_type', type=str, default='l1',
                     help='reconstruction loss type: l1 or l2')
 
+
 ### training setting
-parser.add_argument('--batch_size', type=int, default=1,                                                                ### batch size
+parser.add_argument('--batch_size', type=int, default=8,                                                             
                     help='Training batch size')
 parser.add_argument('--gt_init_epochs', type=int, default=20,
                     help='The number of ground truth init epochs')
 parser.add_argument('--num_epochs', type=int, default=130,
                     help='The number of training epochs')
-parser.add_argument('--write_every_batch', type=int, default=50,
-                    help='Write period')
-parser.add_argument('--print_every', type=int, default=1,
+parser.add_argument('--print_every', type=int, default=50,
                     help='Print period')
 parser.add_argument('--save_every', type=int, default=5,
                     help='Save period')
@@ -104,15 +100,15 @@ parser.add_argument('--gt_ref', type=str2bool, default=True,
                     help='Whether to use ground truth images as references ')
 
 ### evaluate / test / fine tune setting
-parser.add_argument('--continue_training', type=str2bool, default=True,
+parser.add_argument('--continue_training', type=str2bool, default=False,
                     help='whether to load previous training model to continue training')
-parser.add_argument('--eval', type=str2bool, default=False,
+parser.add_argument('--eval', type=str2bool, default=True,
                     help='Evaluation mode')
 parser.add_argument('--eval_save_results', type=str2bool, default=False,
                     help='Save each image during evaluation')
 parser.add_argument('--model_path', type=str, default='save_result/100L30.pt',
                     help='The path of model to evaluation')
-parser.add_argument('--test', type=str2bool, default=True,
+parser.add_argument('--test', type=str2bool, default=False,
                     help='Test mode')
 
 

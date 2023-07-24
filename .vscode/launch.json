@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug DRTT",
+            "type": "python",
+            "request": "launch",
+            "program": "~/miniconda3/envs/DRTT/bin/torchrun",
+            "args": [
+                "--standalone",
+                "--nproc_per_node=2",
+                "main.py"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}

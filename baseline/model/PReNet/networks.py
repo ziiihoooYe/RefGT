@@ -82,8 +82,8 @@ class PReNet(nn.Module):
         c = Variable(torch.zeros(batch_size, 32, row, col))
 
         if self.use_GPU:
-            h = h.to(self.device)
-            c = c.to(self.device)
+            h = h.to(x.device)
+            c = c.to(x.device)
 
         x_list = []
         for i in range(self.iteration):
@@ -185,8 +185,8 @@ class PReNet_LSTM(nn.Module):
         c = Variable(torch.zeros(batch_size, 32, row, col))
 
         if self.use_GPU:
-            h = h.cuda()
-            c = c.cuda()
+            h = h.to(x.device)
+            c = c.to(x.device)
 
         x_list = []
         for i in range(self.iteration):
@@ -287,7 +287,7 @@ class PReNet_GRU(nn.Module):
         h = Variable(torch.zeros(batch_size, 32, row, col))
 
         if self.use_GPU:
-            h = h.cuda()
+            h = h.to(x.device)
 
         x_list = []
         for i in range(self.iteration):
@@ -388,8 +388,8 @@ class PReNet_x(nn.Module):
         c = Variable(torch.zeros(batch_size, 32, row, col))
 
         if self.use_GPU:
-            h = h.cuda()
-            c = c.cuda()
+            h = h.to(x.device)
+            c = c.to(x.device)
 
         x_list = []
         for i in range(self.iteration):
@@ -467,8 +467,8 @@ class PReNet_r(nn.Module):
         c = Variable(torch.zeros(batch_size, 32, row, col))
 
         if self.use_GPU:
-            h = h.cuda()
-            c = c.cuda()
+            h = h.to(x.deivce)
+            c = c.to(x.device)
 
         x_list = []
         for i in range(self.iteration):
