@@ -4,6 +4,7 @@ import torch.nn.functional as F
 
 from loss.MS_SSIM_L1_loss import MS_SSIM_L1_LOSS
 from loss.SSIM import SSIM
+from utils import distributed as dist
 
 
 class ReconstructionLoss(nn.Module):
@@ -44,7 +45,7 @@ class SSIMLoss(nn.Module):
 class MS_SSIM_L1_Loss(nn.Module):
     def __init__(self):
         super(MS_SSIM_L1_Loss, self).__init__()
-        self.loss = MS_SSIM_L1_LOSS(channel=3, data_range=2.)
+        self.loss = MS_SSIM_L1_LOSS(channel=3, data_range=2., cuda_dev=dist.get_rank())
 
     def forward(self, dr, cl):
         return self.loss(dr, cl)
@@ -54,7 +55,7 @@ class DRTTLoss():
     def __init__(self, args):
         #TODO: create loss get function: calculate + save as object vars
         self.rec_loss = ReconstructionLoss(type=args.rec_loss_type)
-        self.ms_ssim_l1_loss = MS_SSIM_L1_LOSS() if args.ms_ssim_l1_loss is True else None
+        self.ms_ssim_l1_loss = MS_SSIM_L1_Loss() if args.ms_ssim_l1_loss is True else None
         self.ssim_loss = SSIMLoss() if args.ssim_loss is True else None
         self.psnr_loss = PSNRLoss(data_range=2.) if args.psnr_loss is True else None
         

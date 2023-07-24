@@ -82,5 +82,5 @@ if __name__ == '__main__':
                 t.train(current_epoch=epoch, is_init=False)
 
             ### evaluation
-            if epoch % args.val_every == 0:
+            if epoch % args.val_every_epoch == 0:
                 t.evaluate(current_epoch=epoch)

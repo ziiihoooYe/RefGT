@@ -16,7 +16,7 @@ class MS_SSIM_L1_LOSS(nn.Module):
                  alpha=0.025,  # weight of ssim and l1 loss
                  compensation=200.0,  # final factor for total loss
                  cuda_dev=0,  # cuda device choice
-                 channel=1):  # RGB image should set to 3 and Gray image should be set to 1
+                 channel=3):  # RGB image should set to 3 and Gray image should be set to 1
         super(MS_SSIM_L1_LOSS, self).__init__()
         self.channel = channel
         self.DR = data_range

@@ -203,7 +203,7 @@ class Trainer:
             self.optimizer.step()
 
             ### print flag            
-            is_print = ((i_batch + 1) % self.args.print_every == 0)  ### flag of print
+            is_print = ((i_batch + 1) % self.args.print_every_batch == 0)  ### flag of print
             if (dist.get_rank() == 0) and (is_print):
                 self.logger.info('epoch: ' + str(current_epoch) +
                                  '\t batch: ' + str(i_batch + 1))
@@ -228,7 +228,7 @@ class Trainer:
             self.logger.info('epoch: ' + str(current_epoch) + '\t Baseline PSNR' + str(_psnr_baseline) + '\t Baseline SSIM' + str(_ssim_baseline))
 
         ### save model
-        if (current_epoch % self.args.save_every == 0) and (dist.get_rank() == 0):
+        if (current_epoch % self.args.save_every_epoch == 0) and (dist.get_rank() == 0):
             self.logger.info('saving the model...')
             tmp = self.model.state_dict()
             model_state_dict = {key: tmp[key] for key in tmp if
