@@ -9,7 +9,13 @@
             "args": [
                 "--standalone",
                 "--nproc_per_node=2",
-                "main.py"
+                "main.py",
+                "--num_gpu=2",
+                "--batch_size=1",
+                "--gt_init_epochs=0",
+                "--print_every_batch=1",
+                "--save_every_epoch=1",
+                "--val_every_epoch=1",
             ],
             "console": "integratedTerminal"
         }

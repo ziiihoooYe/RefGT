@@ -1,3 +1,14 @@
+#ignore data
+/data/BDD100K/
+/data/DDN-Data/
+/data/DID-Data/
+/data/Rain100H/
+/data/Rain100L/
+/data/Rain100H/
+/data/RainTrainH/
+/data/RainTrainL/
+/save_result/
+/test_result/
 # 默认忽略的文件
 /shelf/
 /workspace.xml

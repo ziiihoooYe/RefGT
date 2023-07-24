@@ -37,3 +37,7 @@ def print0(*args, **kwargs):
         print(*args, **kwargs)
 
 #----------------------------------------------------------------------------
+
+
+def barrier():
+    torch.distributed.barrier()
