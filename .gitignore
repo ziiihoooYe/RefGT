@@ -1,0 +1,11 @@
+# 默认忽略的文件
+/shelf/
+/workspace.xml
+# 数据源本地存储已忽略文件
+/.idea/dataSources/
+/dataSources.local.xml
+/save_temp/
+/data/BDD100K/
+/data/DID-Data/
+# 基于编辑器的 HTTP 客户端请求
+/httpRequests/
