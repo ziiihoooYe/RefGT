@@ -529,3 +529,20 @@ Setting OMP_NUM_THREADS environment variable for each process to be 1 in default
 [2023-07-25 07:36:59,810] - [trainer.py file line:208] - INFO: epoch: 51	 batch: 50
 [2023-07-25 07:37:00,030] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.2838697433
 [2023-07-25 07:37:00,074] - [trainer.py file line:215] - INFO: psnr_loss: -29.1303844452
+[2023-07-25 07:44:22,261] - [trainer.py file line:208] - INFO: epoch: 51	 batch: 100
+[2023-07-25 07:44:22,427] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.5310096741
+[2023-07-25 07:44:22,443] - [trainer.py file line:215] - INFO: psnr_loss: -29.7135696411
+[2023-07-25 07:45:46,398] - [trainer.py file line:227] - INFO: epoch: 51	 DRTT PSNR33.53734110263624	 DRTT SSIM0.9460973733641365
+[2023-07-25 07:45:46,423] - [trainer.py file line:228] - INFO: epoch: 51	 Baseline PSNR33.18835949949887	 Baseline SSIM0.9449850127086281
+[2023-07-25 07:45:46,424] - [trainer.py file line:165] - INFO: Current epoch: 52
+[2023-07-25 07:45:46,424] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 07:53:11,605] - [trainer.py file line:208] - INFO: epoch: 52	 batch: 50
+[2023-07-25 07:53:11,842] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 7.1769742966
+[2023-07-25 07:53:11,900] - [trainer.py file line:215] - INFO: psnr_loss: -27.3841381073
+[2023-07-25 08:00:49,035] - [trainer.py file line:208] - INFO: epoch: 52	 batch: 100
+[2023-07-25 08:00:49,449] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.4394359589
+[2023-07-25 08:00:49,511] - [trainer.py file line:215] - INFO: psnr_loss: -31.1502685547
+[2023-07-25 08:02:12,981] - [trainer.py file line:227] - INFO: epoch: 52	 DRTT PSNR33.60716713676861	 DRTT SSIM0.9469582523532392
+[2023-07-25 08:02:12,981] - [trainer.py file line:228] - INFO: epoch: 52	 Baseline PSNR33.24934106836323	 Baseline SSIM0.9457394954688886
+[2023-07-25 08:02:12,982] - [trainer.py file line:165] - INFO: Current epoch: 53
+[2023-07-25 08:02:12,982] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
