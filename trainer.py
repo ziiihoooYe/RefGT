@@ -219,7 +219,7 @@ class Trainer:
 
             ### mark down epoch matrics (PSNR, SSIM)
             _psnr, _ssim = matrics.matrics_update(_psnr, _ssim, i_batch+1, dr.detach(), cl_img.detach())
-            _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr.detach(), cl_img.detach())
+            _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr_img.detach(), cl_img.detach())
         
 
         ### print epoch matrics
