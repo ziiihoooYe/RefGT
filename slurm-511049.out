@@ -546,3 +546,396 @@ Setting OMP_NUM_THREADS environment variable for each process to be 1 in default
 [2023-07-25 08:02:12,981] - [trainer.py file line:228] - INFO: epoch: 52	 Baseline PSNR33.24934106836323	 Baseline SSIM0.9457394954688886
 [2023-07-25 08:02:12,982] - [trainer.py file line:165] - INFO: Current epoch: 53
 [2023-07-25 08:02:12,982] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 08:09:38,475] - [trainer.py file line:208] - INFO: epoch: 53	 batch: 50
+[2023-07-25 08:09:39,029] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.5556707382
+[2023-07-25 08:09:39,134] - [trainer.py file line:215] - INFO: psnr_loss: -29.6299018860
+[2023-07-25 08:17:08,962] - [trainer.py file line:208] - INFO: epoch: 53	 batch: 100
+[2023-07-25 08:17:09,200] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.2916069031
+[2023-07-25 08:17:09,258] - [trainer.py file line:215] - INFO: psnr_loss: -33.6941566467
+[2023-07-25 08:18:33,997] - [trainer.py file line:227] - INFO: epoch: 53	 DRTT PSNR33.60404265653769	 DRTT SSIM0.9478870423177117
+[2023-07-25 08:18:33,997] - [trainer.py file line:228] - INFO: epoch: 53	 Baseline PSNR33.179271085323535	 Baseline SSIM0.9465300560348116
+[2023-07-25 08:18:33,998] - [trainer.py file line:165] - INFO: Current epoch: 54
+[2023-07-25 08:18:33,998] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 08:25:51,230] - [trainer.py file line:208] - INFO: epoch: 54	 batch: 50
+[2023-07-25 08:25:51,595] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3392424583
+[2023-07-25 08:25:51,644] - [trainer.py file line:215] - INFO: psnr_loss: -31.0089035034
+[2023-07-25 08:33:25,883] - [trainer.py file line:208] - INFO: epoch: 54	 batch: 100
+[2023-07-25 08:33:26,070] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.5770711899
+[2023-07-25 08:33:26,123] - [trainer.py file line:215] - INFO: psnr_loss: -30.5137062073
+[2023-07-25 08:34:51,446] - [trainer.py file line:227] - INFO: epoch: 54	 DRTT PSNR33.6246263108515	 DRTT SSIM0.9469744267822106
+[2023-07-25 08:34:51,446] - [trainer.py file line:228] - INFO: epoch: 54	 Baseline PSNR33.186674954871194	 Baseline SSIM0.9455813568932584
+[2023-07-25 08:34:51,447] - [trainer.py file line:165] - INFO: Current epoch: 55
+[2023-07-25 08:34:51,447] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 08:42:08,490] - [trainer.py file line:208] - INFO: epoch: 55	 batch: 50
+[2023-07-25 08:42:08,539] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.6036338806
+[2023-07-25 08:42:08,557] - [trainer.py file line:215] - INFO: psnr_loss: -33.1056518555
+[2023-07-25 08:49:37,131] - [trainer.py file line:208] - INFO: epoch: 55	 batch: 100
+[2023-07-25 08:49:37,607] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.4722056389
+[2023-07-25 08:49:37,666] - [trainer.py file line:215] - INFO: psnr_loss: -31.0795669556
+[2023-07-25 08:51:06,224] - [trainer.py file line:227] - INFO: epoch: 55	 DRTT PSNR33.7377394878271	 DRTT SSIM0.9483678422334476
+[2023-07-25 08:51:06,225] - [trainer.py file line:228] - INFO: epoch: 55	 Baseline PSNR33.33004846077508	 Baseline SSIM0.9471153380301497
+[2023-07-25 08:51:06,225] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 08:51:06,823] - [trainer.py file line:245] - INFO: Epoch 55 evaluation process...
+[2023-07-25 08:52:23,400] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 32.876 	 SSIM (now): 0.9364
+[2023-07-25 08:52:23,422] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.552 	 SSIM (now): 0.9351
+[2023-07-25 08:52:23,422] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.323 (55) 	 SSIM improvement (max): 0.0014 (55)
+[2023-07-25 08:52:23,422] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 08:52:26,901] - [trainer.py file line:165] - INFO: Current epoch: 56
+[2023-07-25 08:52:26,901] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 08:59:41,710] - [trainer.py file line:208] - INFO: epoch: 56	 batch: 50
+[2023-07-25 08:59:42,055] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.1747503281
+[2023-07-25 08:59:42,092] - [trainer.py file line:215] - INFO: psnr_loss: -31.6140727997
+[2023-07-25 09:07:06,971] - [trainer.py file line:208] - INFO: epoch: 56	 batch: 100
+[2023-07-25 09:07:07,294] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 7.0892391205
+[2023-07-25 09:07:07,369] - [trainer.py file line:215] - INFO: psnr_loss: -28.4845447540
+[2023-07-25 09:08:35,521] - [trainer.py file line:227] - INFO: epoch: 56	 DRTT PSNR33.57284567100048	 DRTT SSIM0.9471258130455257
+[2023-07-25 09:08:35,521] - [trainer.py file line:228] - INFO: epoch: 56	 Baseline PSNR33.1365890784254	 Baseline SSIM0.9456815873464216
+[2023-07-25 09:08:35,522] - [trainer.py file line:165] - INFO: Current epoch: 57
+[2023-07-25 09:08:35,522] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 09:16:03,179] - [trainer.py file line:208] - INFO: epoch: 57	 batch: 50
+[2023-07-25 09:16:03,623] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.6861791611
+[2023-07-25 09:16:03,744] - [trainer.py file line:215] - INFO: psnr_loss: -30.6759834290
+[2023-07-25 09:23:42,185] - [trainer.py file line:208] - INFO: epoch: 57	 batch: 100
+[2023-07-25 09:23:42,870] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.1311850548
+[2023-07-25 09:23:43,105] - [trainer.py file line:215] - INFO: psnr_loss: -30.0423259735
+[2023-07-25 09:25:20,596] - [trainer.py file line:227] - INFO: epoch: 57	 DRTT PSNR33.66250516630476	 DRTT SSIM0.9479217298449124
+[2023-07-25 09:25:20,596] - [trainer.py file line:228] - INFO: epoch: 57	 Baseline PSNR33.24819773308563	 Baseline SSIM0.946588076502644
+[2023-07-25 09:25:20,597] - [trainer.py file line:165] - INFO: Current epoch: 58
+[2023-07-25 09:25:20,597] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 09:33:10,705] - [trainer.py file line:208] - INFO: epoch: 58	 batch: 50
+[2023-07-25 09:33:11,204] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 7.0998768806
+[2023-07-25 09:33:11,331] - [trainer.py file line:215] - INFO: psnr_loss: -29.2393226624
+[2023-07-25 09:40:34,126] - [trainer.py file line:208] - INFO: epoch: 58	 batch: 100
+[2023-07-25 09:40:34,377] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 3.9508688450
+[2023-07-25 09:40:34,438] - [trainer.py file line:215] - INFO: psnr_loss: -33.5296020508
+[2023-07-25 09:41:58,270] - [trainer.py file line:227] - INFO: epoch: 58	 DRTT PSNR33.94097999979978	 DRTT SSIM0.9495217988081909
+[2023-07-25 09:41:58,271] - [trainer.py file line:228] - INFO: epoch: 58	 Baseline PSNR33.45862632212549	 Baseline SSIM0.9480079453389334
+[2023-07-25 09:41:58,272] - [trainer.py file line:165] - INFO: Current epoch: 59
+[2023-07-25 09:41:58,272] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 09:49:21,004] - [trainer.py file line:208] - INFO: epoch: 59	 batch: 50
+[2023-07-25 09:49:21,081] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.3767609596
+[2023-07-25 09:49:21,112] - [trainer.py file line:215] - INFO: psnr_loss: -31.9054260254
+[2023-07-25 09:56:47,028] - [trainer.py file line:208] - INFO: epoch: 59	 batch: 100
+[2023-07-25 09:56:47,183] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.9573659897
+[2023-07-25 09:56:47,219] - [trainer.py file line:215] - INFO: psnr_loss: -30.1054382324
+[2023-07-25 09:58:17,420] - [trainer.py file line:227] - INFO: epoch: 59	 DRTT PSNR33.89865334779215	 DRTT SSIM0.9493898807839252
+[2023-07-25 09:58:17,425] - [trainer.py file line:228] - INFO: epoch: 59	 Baseline PSNR33.42639801083786	 Baseline SSIM0.9479175818078635
+[2023-07-25 09:58:17,426] - [trainer.py file line:165] - INFO: Current epoch: 60
+[2023-07-25 09:58:17,427] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 10:05:41,009] - [trainer.py file line:208] - INFO: epoch: 60	 batch: 50
+[2023-07-25 10:05:41,231] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.3618755341
+[2023-07-25 10:05:41,280] - [trainer.py file line:215] - INFO: psnr_loss: -29.3781757355
+[2023-07-25 10:13:01,663] - [trainer.py file line:208] - INFO: epoch: 60	 batch: 100
+[2023-07-25 10:13:02,019] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3181066513
+[2023-07-25 10:13:02,091] - [trainer.py file line:215] - INFO: psnr_loss: -31.1391525269
+[2023-07-25 10:14:26,703] - [trainer.py file line:227] - INFO: epoch: 60	 DRTT PSNR33.74476245799861	 DRTT SSIM0.9481755499275225
+[2023-07-25 10:14:26,703] - [trainer.py file line:228] - INFO: epoch: 60	 Baseline PSNR33.26664112725283	 Baseline SSIM0.9465083184038398
+[2023-07-25 10:14:26,703] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 10:14:27,246] - [trainer.py file line:245] - INFO: Epoch 60 evaluation process...
+[2023-07-25 10:15:47,752] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 32.649 	 SSIM (now): 0.9355
+[2023-07-25 10:15:47,867] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 31.989 	 SSIM (now): 0.9331
+[2023-07-25 10:15:47,867] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.660 (60) 	 SSIM improvement (max): 0.0025 (60)
+[2023-07-25 10:15:47,867] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 10:15:48,141] - [trainer.py file line:165] - INFO: Current epoch: 61
+[2023-07-25 10:15:48,141] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 10:23:08,211] - [trainer.py file line:208] - INFO: epoch: 61	 batch: 50
+[2023-07-25 10:23:08,532] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.5401639938
+[2023-07-25 10:23:08,620] - [trainer.py file line:215] - INFO: psnr_loss: -30.9306240082
+[2023-07-25 10:30:29,528] - [trainer.py file line:208] - INFO: epoch: 61	 batch: 100
+[2023-07-25 10:30:29,796] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.7158117294
+[2023-07-25 10:30:29,847] - [trainer.py file line:215] - INFO: psnr_loss: -31.4211387634
+[2023-07-25 10:31:54,653] - [trainer.py file line:227] - INFO: epoch: 61	 DRTT PSNR33.86313897325266	 DRTT SSIM0.9489218172444331
+[2023-07-25 10:31:54,672] - [trainer.py file line:228] - INFO: epoch: 61	 Baseline PSNR33.377723855224644	 Baseline SSIM0.9472850376481252
+[2023-07-25 10:31:54,673] - [trainer.py file line:165] - INFO: Current epoch: 62
+[2023-07-25 10:31:54,673] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 10:39:15,963] - [trainer.py file line:208] - INFO: epoch: 62	 batch: 50
+[2023-07-25 10:39:16,294] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.2497754097
+[2023-07-25 10:39:16,378] - [trainer.py file line:215] - INFO: psnr_loss: -31.0712165833
+[2023-07-25 10:46:42,064] - [trainer.py file line:208] - INFO: epoch: 62	 batch: 100
+[2023-07-25 10:46:42,187] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.2338981628
+[2023-07-25 10:46:42,190] - [trainer.py file line:215] - INFO: psnr_loss: -31.2616195679
+[2023-07-25 10:48:05,228] - [trainer.py file line:227] - INFO: epoch: 62	 DRTT PSNR33.929523050235815	 DRTT SSIM0.9494624377775457
+[2023-07-25 10:48:05,228] - [trainer.py file line:228] - INFO: epoch: 62	 Baseline PSNR33.46896008200161	 Baseline SSIM0.9478455275866234
+[2023-07-25 10:48:05,229] - [trainer.py file line:165] - INFO: Current epoch: 63
+[2023-07-25 10:48:05,229] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 10:55:27,257] - [trainer.py file line:208] - INFO: epoch: 63	 batch: 50
+[2023-07-25 10:55:27,547] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.5108203888
+[2023-07-25 10:55:27,605] - [trainer.py file line:215] - INFO: psnr_loss: -30.5099964142
+[2023-07-25 11:02:51,502] - [trainer.py file line:208] - INFO: epoch: 63	 batch: 100
+[2023-07-25 11:02:51,827] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.4173693657
+[2023-07-25 11:02:51,879] - [trainer.py file line:215] - INFO: psnr_loss: -30.8539485931
+[2023-07-25 11:04:20,527] - [trainer.py file line:227] - INFO: epoch: 63	 DRTT PSNR33.8244967949473	 DRTT SSIM0.9494363027446535
+[2023-07-25 11:04:20,528] - [trainer.py file line:228] - INFO: epoch: 63	 Baseline PSNR33.31818586126603	 Baseline SSIM0.9476707015394817
+[2023-07-25 11:04:20,529] - [trainer.py file line:165] - INFO: Current epoch: 64
+[2023-07-25 11:04:20,529] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 11:11:39,565] - [trainer.py file line:208] - INFO: epoch: 64	 batch: 50
+[2023-07-25 11:11:39,659] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.7401146889
+[2023-07-25 11:11:39,688] - [trainer.py file line:215] - INFO: psnr_loss: -31.3434810638
+[2023-07-25 11:19:10,706] - [trainer.py file line:208] - INFO: epoch: 64	 batch: 100
+[2023-07-25 11:19:10,947] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.2808704376
+[2023-07-25 11:19:10,988] - [trainer.py file line:215] - INFO: psnr_loss: -31.9181976318
+[2023-07-25 11:20:35,118] - [trainer.py file line:227] - INFO: epoch: 64	 DRTT PSNR33.79130953563959	 DRTT SSIM0.948315743333871
+[2023-07-25 11:20:35,119] - [trainer.py file line:228] - INFO: epoch: 64	 Baseline PSNR33.26613037921714	 Baseline SSIM0.9465569125666154
+[2023-07-25 11:20:35,119] - [trainer.py file line:165] - INFO: Current epoch: 65
+[2023-07-25 11:20:35,120] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 11:27:54,811] - [trainer.py file line:208] - INFO: epoch: 65	 batch: 50
+[2023-07-25 11:27:54,889] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.0789880753
+[2023-07-25 11:27:54,891] - [trainer.py file line:215] - INFO: psnr_loss: -30.7824401855
+[2023-07-25 11:35:09,943] - [trainer.py file line:208] - INFO: epoch: 65	 batch: 100
+[2023-07-25 11:35:10,073] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.5737266541
+[2023-07-25 11:35:10,113] - [trainer.py file line:215] - INFO: psnr_loss: -32.6010208130
+[2023-07-25 11:36:35,822] - [trainer.py file line:227] - INFO: epoch: 65	 DRTT PSNR34.02815169645612	 DRTT SSIM0.9494799041265707
+[2023-07-25 11:36:35,901] - [trainer.py file line:228] - INFO: epoch: 65	 Baseline PSNR33.45561792104519	 Baseline SSIM0.9476121715761965
+[2023-07-25 11:36:35,901] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 11:36:36,436] - [trainer.py file line:245] - INFO: Epoch 65 evaluation process...
+[2023-07-25 11:37:55,229] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 33.293 	 SSIM (now): 0.9394
+[2023-07-25 11:37:55,231] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.697 	 SSIM (now): 0.9371
+[2023-07-25 11:37:55,231] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.660 (60) 	 SSIM improvement (max): 0.0025 (60)
+[2023-07-25 11:37:55,231] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 11:37:57,622] - [trainer.py file line:165] - INFO: Current epoch: 66
+[2023-07-25 11:37:57,622] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 11:45:14,246] - [trainer.py file line:208] - INFO: epoch: 66	 batch: 50
+[2023-07-25 11:45:14,386] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 7.0863180161
+[2023-07-25 11:45:14,405] - [trainer.py file line:215] - INFO: psnr_loss: -28.9154529572
+[2023-07-25 11:52:36,176] - [trainer.py file line:208] - INFO: epoch: 66	 batch: 100
+[2023-07-25 11:52:36,532] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.6714048386
+[2023-07-25 11:52:36,570] - [trainer.py file line:215] - INFO: psnr_loss: -32.5454559326
+[2023-07-25 11:54:00,860] - [trainer.py file line:227] - INFO: epoch: 66	 DRTT PSNR33.9360604364339	 DRTT SSIM0.9496220352977716
+[2023-07-25 11:54:00,876] - [trainer.py file line:228] - INFO: epoch: 66	 Baseline PSNR33.380381869773736	 Baseline SSIM0.9477081540912683
+[2023-07-25 11:54:00,877] - [trainer.py file line:165] - INFO: Current epoch: 67
+[2023-07-25 11:54:00,877] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 12:01:24,974] - [trainer.py file line:208] - INFO: epoch: 67	 batch: 50
+[2023-07-25 12:01:25,311] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3145675659
+[2023-07-25 12:01:25,369] - [trainer.py file line:215] - INFO: psnr_loss: -31.7013015747
+[2023-07-25 12:08:44,261] - [trainer.py file line:208] - INFO: epoch: 67	 batch: 100
+[2023-07-25 12:08:44,533] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.3032536507
+[2023-07-25 12:08:44,588] - [trainer.py file line:215] - INFO: psnr_loss: -29.7958393097
+[2023-07-25 12:10:13,968] - [trainer.py file line:227] - INFO: epoch: 67	 DRTT PSNR33.648694826051205	 DRTT SSIM0.9470481964815975
+[2023-07-25 12:10:14,088] - [trainer.py file line:228] - INFO: epoch: 67	 Baseline PSNR33.07506777889683	 Baseline SSIM0.9449425134435977
+[2023-07-25 12:10:14,090] - [trainer.py file line:165] - INFO: Current epoch: 68
+[2023-07-25 12:10:14,136] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 12:17:28,530] - [trainer.py file line:208] - INFO: epoch: 68	 batch: 50
+[2023-07-25 12:17:28,823] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.1254138947
+[2023-07-25 12:17:28,924] - [trainer.py file line:215] - INFO: psnr_loss: -31.2463302612
+[2023-07-25 12:24:51,672] - [trainer.py file line:208] - INFO: epoch: 68	 batch: 100
+[2023-07-25 12:24:51,943] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.0406122208
+[2023-07-25 12:24:52,012] - [trainer.py file line:215] - INFO: psnr_loss: -29.6375961304
+[2023-07-25 12:26:15,050] - [trainer.py file line:227] - INFO: epoch: 68	 DRTT PSNR33.80694750537902	 DRTT SSIM0.9484996292297476
+[2023-07-25 12:26:15,071] - [trainer.py file line:228] - INFO: epoch: 68	 Baseline PSNR33.22170671337751	 Baseline SSIM0.9461857834206008
+[2023-07-25 12:26:15,072] - [trainer.py file line:165] - INFO: Current epoch: 69
+[2023-07-25 12:26:15,073] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 12:33:32,733] - [trainer.py file line:208] - INFO: epoch: 69	 batch: 50
+[2023-07-25 12:33:33,152] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.1126718521
+[2023-07-25 12:33:33,222] - [trainer.py file line:215] - INFO: psnr_loss: -31.2200088501
+[2023-07-25 12:40:55,339] - [trainer.py file line:208] - INFO: epoch: 69	 batch: 100
+[2023-07-25 12:40:55,623] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.9155349731
+[2023-07-25 12:40:55,690] - [trainer.py file line:215] - INFO: psnr_loss: -32.2846717834
+[2023-07-25 12:42:21,941] - [trainer.py file line:227] - INFO: epoch: 69	 DRTT PSNR33.69527869821966	 DRTT SSIM0.9468638005808474
+[2023-07-25 12:42:21,976] - [trainer.py file line:228] - INFO: epoch: 69	 Baseline PSNR33.070790611321556	 Baseline SSIM0.9445507771199128
+[2023-07-25 12:42:21,977] - [trainer.py file line:165] - INFO: Current epoch: 70
+[2023-07-25 12:42:21,978] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 12:49:48,009] - [trainer.py file line:208] - INFO: epoch: 70	 batch: 50
+[2023-07-25 12:49:48,346] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.0529313087
+[2023-07-25 12:49:48,394] - [trainer.py file line:215] - INFO: psnr_loss: -30.1239166260
+[2023-07-25 12:57:08,390] - [trainer.py file line:208] - INFO: epoch: 70	 batch: 100
+[2023-07-25 12:57:08,676] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.7497591972
+[2023-07-25 12:57:08,729] - [trainer.py file line:215] - INFO: psnr_loss: -30.0280933380
+[2023-07-25 12:58:37,549] - [trainer.py file line:227] - INFO: epoch: 70	 DRTT PSNR33.89498868298158	 DRTT SSIM0.9486002112970485
+[2023-07-25 12:58:37,549] - [trainer.py file line:228] - INFO: epoch: 70	 Baseline PSNR33.27561059157202	 Baseline SSIM0.9464748033371628
+[2023-07-25 12:58:37,549] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 12:58:38,395] - [trainer.py file line:245] - INFO: Epoch 70 evaluation process...
+[2023-07-25 12:59:57,415] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 33.426 	 SSIM (now): 0.9453
+[2023-07-25 12:59:57,546] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.961 	 SSIM (now): 0.9432
+[2023-07-25 12:59:57,546] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.660 (60) 	 SSIM improvement (max): 0.0025 (60)
+[2023-07-25 12:59:57,546] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 12:59:58,821] - [trainer.py file line:165] - INFO: Current epoch: 71
+[2023-07-25 12:59:58,821] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 13:07:26,329] - [trainer.py file line:208] - INFO: epoch: 71	 batch: 50
+[2023-07-25 13:07:26,492] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3300862312
+[2023-07-25 13:07:26,532] - [trainer.py file line:215] - INFO: psnr_loss: -30.8750762939
+[2023-07-25 13:14:51,719] - [trainer.py file line:208] - INFO: epoch: 71	 batch: 100
+[2023-07-25 13:14:51,889] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.0377631187
+[2023-07-25 13:14:51,962] - [trainer.py file line:215] - INFO: psnr_loss: -31.8560295105
+[2023-07-25 13:16:17,783] - [trainer.py file line:227] - INFO: epoch: 71	 DRTT PSNR34.060293813251604	 DRTT SSIM0.949491657175009
+[2023-07-25 13:16:17,783] - [trainer.py file line:228] - INFO: epoch: 71	 Baseline PSNR33.4222566566453	 Baseline SSIM0.947193277994827
+[2023-07-25 13:16:17,785] - [trainer.py file line:165] - INFO: Current epoch: 72
+[2023-07-25 13:16:17,785] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 13:23:35,915] - [trainer.py file line:208] - INFO: epoch: 72	 batch: 50
+[2023-07-25 13:23:36,101] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.1849298477
+[2023-07-25 13:23:36,196] - [trainer.py file line:215] - INFO: psnr_loss: -33.7741355896
+[2023-07-25 13:31:09,419] - [trainer.py file line:208] - INFO: epoch: 72	 batch: 100
+[2023-07-25 13:31:09,653] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.9505805969
+[2023-07-25 13:31:09,715] - [trainer.py file line:215] - INFO: psnr_loss: -30.0510063171
+[2023-07-25 13:32:33,499] - [trainer.py file line:227] - INFO: epoch: 72	 DRTT PSNR33.74869678894631	 DRTT SSIM0.9474311741595348
+[2023-07-25 13:32:33,500] - [trainer.py file line:228] - INFO: epoch: 72	 Baseline PSNR33.0616530289988	 Baseline SSIM0.9449801004461876
+[2023-07-25 13:32:33,501] - [trainer.py file line:165] - INFO: Current epoch: 73
+[2023-07-25 13:32:33,501] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 13:39:52,448] - [trainer.py file line:208] - INFO: epoch: 73	 batch: 50
+[2023-07-25 13:39:52,683] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.6573581696
+[2023-07-25 13:39:52,745] - [trainer.py file line:215] - INFO: psnr_loss: -28.9708042145
+[2023-07-25 13:47:18,414] - [trainer.py file line:208] - INFO: epoch: 73	 batch: 100
+[2023-07-25 13:47:18,713] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.2389364243
+[2023-07-25 13:47:18,763] - [trainer.py file line:215] - INFO: psnr_loss: -31.1511344910
+[2023-07-25 13:48:45,657] - [trainer.py file line:227] - INFO: epoch: 73	 DRTT PSNR33.977089654068756	 DRTT SSIM0.9492111617079028
+[2023-07-25 13:48:45,657] - [trainer.py file line:228] - INFO: epoch: 73	 Baseline PSNR33.25779848456024	 Baseline SSIM0.9467843221383174
+[2023-07-25 13:48:45,658] - [trainer.py file line:165] - INFO: Current epoch: 74
+[2023-07-25 13:48:45,658] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 13:56:09,657] - [trainer.py file line:208] - INFO: epoch: 74	 batch: 50
+[2023-07-25 13:56:09,877] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.4449729919
+[2023-07-25 13:56:09,924] - [trainer.py file line:215] - INFO: psnr_loss: -32.8450660706
+[2023-07-25 14:03:24,631] - [trainer.py file line:208] - INFO: epoch: 74	 batch: 100
+[2023-07-25 14:03:24,941] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.4932522774
+[2023-07-25 14:03:24,985] - [trainer.py file line:215] - INFO: psnr_loss: -31.0745315552
+[2023-07-25 14:04:49,115] - [trainer.py file line:227] - INFO: epoch: 74	 DRTT PSNR33.990233064486915	 DRTT SSIM0.9493538075345497
+[2023-07-25 14:04:49,139] - [trainer.py file line:228] - INFO: epoch: 74	 Baseline PSNR33.324269934843024	 Baseline SSIM0.9469701399483357
+[2023-07-25 14:04:49,140] - [trainer.py file line:165] - INFO: Current epoch: 75
+[2023-07-25 14:04:49,140] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 14:12:06,289] - [trainer.py file line:208] - INFO: epoch: 75	 batch: 50
+[2023-07-25 14:12:06,402] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.9743375778
+[2023-07-25 14:12:06,421] - [trainer.py file line:215] - INFO: psnr_loss: -31.6093635559
+[2023-07-25 14:19:34,032] - [trainer.py file line:208] - INFO: epoch: 75	 batch: 100
+[2023-07-25 14:19:34,396] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.9175772667
+[2023-07-25 14:19:34,440] - [trainer.py file line:215] - INFO: psnr_loss: -28.9669895172
+[2023-07-25 14:21:00,697] - [trainer.py file line:227] - INFO: epoch: 75	 DRTT PSNR33.87580599249582	 DRTT SSIM0.9479283862551245
+[2023-07-25 14:21:00,698] - [trainer.py file line:228] - INFO: epoch: 75	 Baseline PSNR33.137341709983396	 Baseline SSIM0.94517613283983
+[2023-07-25 14:21:00,698] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 14:21:01,316] - [trainer.py file line:245] - INFO: Epoch 75 evaluation process...
+[2023-07-25 14:22:19,675] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 32.898 	 SSIM (now): 0.9406
+[2023-07-25 14:22:19,717] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.200 	 SSIM (now): 0.9380
+[2023-07-25 14:22:19,717] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.698 (75) 	 SSIM improvement (max): 0.0026 (75)
+[2023-07-25 14:22:19,717] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 14:22:22,068] - [trainer.py file line:165] - INFO: Current epoch: 76
+[2023-07-25 14:22:22,068] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 14:29:51,650] - [trainer.py file line:208] - INFO: epoch: 76	 batch: 50
+[2023-07-25 14:29:51,894] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3083267212
+[2023-07-25 14:29:51,927] - [trainer.py file line:215] - INFO: psnr_loss: -31.0794811249
+[2023-07-25 14:37:14,092] - [trainer.py file line:208] - INFO: epoch: 76	 batch: 100
+[2023-07-25 14:37:14,349] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.6193108559
+[2023-07-25 14:37:14,436] - [trainer.py file line:215] - INFO: psnr_loss: -30.2305507660
+[2023-07-25 14:38:39,298] - [trainer.py file line:227] - INFO: epoch: 76	 DRTT PSNR33.89541277516101	 DRTT SSIM0.9480033686778763
+[2023-07-25 14:38:39,298] - [trainer.py file line:228] - INFO: epoch: 76	 Baseline PSNR33.175968800564526	 Baseline SSIM0.9452947099499616
+[2023-07-25 14:38:39,299] - [trainer.py file line:165] - INFO: Current epoch: 77
+[2023-07-25 14:38:39,300] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 14:45:58,364] - [trainer.py file line:208] - INFO: epoch: 77	 batch: 50
+[2023-07-25 14:45:58,597] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.3004570007
+[2023-07-25 14:45:58,640] - [trainer.py file line:215] - INFO: psnr_loss: -29.3605232239
+[2023-07-25 14:53:19,923] - [trainer.py file line:208] - INFO: epoch: 77	 batch: 100
+[2023-07-25 14:53:20,227] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.5094041824
+[2023-07-25 14:53:20,366] - [trainer.py file line:215] - INFO: psnr_loss: -32.8250045776
+[2023-07-25 14:54:45,722] - [trainer.py file line:227] - INFO: epoch: 77	 DRTT PSNR33.71906093416185	 DRTT SSIM0.9467343563513062
+[2023-07-25 14:54:45,723] - [trainer.py file line:228] - INFO: epoch: 77	 Baseline PSNR32.98715880635903	 Baseline SSIM0.9440217842863459
+[2023-07-25 14:54:45,724] - [trainer.py file line:165] - INFO: Current epoch: 78
+[2023-07-25 14:54:45,724] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 15:02:10,310] - [trainer.py file line:208] - INFO: epoch: 78	 batch: 50
+[2023-07-25 15:02:10,659] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.7766857147
+[2023-07-25 15:02:10,696] - [trainer.py file line:215] - INFO: psnr_loss: -29.8784656525
+[2023-07-25 15:09:36,835] - [trainer.py file line:208] - INFO: epoch: 78	 batch: 100
+[2023-07-25 15:09:37,089] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.0825419426
+[2023-07-25 15:09:37,115] - [trainer.py file line:215] - INFO: psnr_loss: -31.2902545929
+[2023-07-25 15:11:00,880] - [trainer.py file line:227] - INFO: epoch: 78	 DRTT PSNR33.973025869275546	 DRTT SSIM0.9489608142961804
+[2023-07-25 15:11:00,880] - [trainer.py file line:228] - INFO: epoch: 78	 Baseline PSNR33.24944668744663	 Baseline SSIM0.946287172273597
+[2023-07-25 15:11:00,881] - [trainer.py file line:165] - INFO: Current epoch: 79
+[2023-07-25 15:11:00,881] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 15:18:23,866] - [trainer.py file line:208] - INFO: epoch: 79	 batch: 50
+[2023-07-25 15:18:24,012] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.1678037643
+[2023-07-25 15:18:24,034] - [trainer.py file line:215] - INFO: psnr_loss: -31.5992050171
+[2023-07-25 15:25:51,699] - [trainer.py file line:208] - INFO: epoch: 79	 batch: 100
+[2023-07-25 15:25:51,926] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.4804630280
+[2023-07-25 15:25:51,970] - [trainer.py file line:215] - INFO: psnr_loss: -29.5700187683
+[2023-07-25 15:27:17,605] - [trainer.py file line:227] - INFO: epoch: 79	 DRTT PSNR33.86687913754123	 DRTT SSIM0.9481518620565312
+[2023-07-25 15:27:17,605] - [trainer.py file line:228] - INFO: epoch: 79	 Baseline PSNR33.14729482955147	 Baseline SSIM0.9454497834642934
+[2023-07-25 15:27:17,606] - [trainer.py file line:165] - INFO: Current epoch: 80
+[2023-07-25 15:27:17,606] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 15:34:40,820] - [trainer.py file line:208] - INFO: epoch: 80	 batch: 50
+[2023-07-25 15:34:40,873] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3439450264
+[2023-07-25 15:34:40,973] - [trainer.py file line:215] - INFO: psnr_loss: -31.2098350525
+[2023-07-25 15:42:09,852] - [trainer.py file line:208] - INFO: epoch: 80	 batch: 100
+[2023-07-25 15:42:10,062] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.0075435638
+[2023-07-25 15:42:10,128] - [trainer.py file line:215] - INFO: psnr_loss: -32.3437118530
+[2023-07-25 15:43:37,629] - [trainer.py file line:227] - INFO: epoch: 80	 DRTT PSNR34.0569534221234	 DRTT SSIM0.949733605937407
+[2023-07-25 15:43:37,629] - [trainer.py file line:228] - INFO: epoch: 80	 Baseline PSNR33.31277911438096	 Baseline SSIM0.9470146894461287
+[2023-07-25 15:43:37,629] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 15:43:38,304] - [trainer.py file line:245] - INFO: Epoch 80 evaluation process...
+[2023-07-25 15:44:58,911] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 33.292 	 SSIM (now): 0.9440
+[2023-07-25 15:44:58,966] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.739 	 SSIM (now): 0.9416
+[2023-07-25 15:44:58,966] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.698 (75) 	 SSIM improvement (max): 0.0026 (75)
+[2023-07-25 15:44:58,966] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 15:44:59,357] - [trainer.py file line:165] - INFO: Current epoch: 81
+[2023-07-25 15:44:59,357] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 15:52:26,393] - [trainer.py file line:208] - INFO: epoch: 81	 batch: 50
+[2023-07-25 15:52:26,734] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.0368371010
+[2023-07-25 15:52:26,835] - [trainer.py file line:215] - INFO: psnr_loss: -32.2415237427
+[2023-07-25 15:59:51,437] - [trainer.py file line:208] - INFO: epoch: 81	 batch: 100
+[2023-07-25 15:59:51,730] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.5842366219
+[2023-07-25 15:59:51,783] - [trainer.py file line:215] - INFO: psnr_loss: -32.8506088257
+[2023-07-25 16:01:17,704] - [trainer.py file line:227] - INFO: epoch: 81	 DRTT PSNR34.05344405045969	 DRTT SSIM0.9496697852761399
+[2023-07-25 16:01:17,705] - [trainer.py file line:228] - INFO: epoch: 81	 Baseline PSNR33.28620451413473	 Baseline SSIM0.9468356825866687
+[2023-07-25 16:01:17,706] - [trainer.py file line:165] - INFO: Current epoch: 82
+[2023-07-25 16:01:17,707] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 16:08:42,646] - [trainer.py file line:208] - INFO: epoch: 82	 batch: 50
+[2023-07-25 16:08:42,942] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.3396568298
+[2023-07-25 16:08:42,968] - [trainer.py file line:215] - INFO: psnr_loss: -31.2660293579
+[2023-07-25 16:16:10,338] - [trainer.py file line:208] - INFO: epoch: 82	 batch: 100
+[2023-07-25 16:16:10,646] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.6389813423
+[2023-07-25 16:16:10,704] - [trainer.py file line:215] - INFO: psnr_loss: -30.4001464844
+[2023-07-25 16:17:35,806] - [trainer.py file line:227] - INFO: epoch: 82	 DRTT PSNR33.87363949451435	 DRTT SSIM0.9478567658006467
+[2023-07-25 16:17:35,806] - [trainer.py file line:228] - INFO: epoch: 82	 Baseline PSNR33.123676955194625	 Baseline SSIM0.9448840439321711
+[2023-07-25 16:17:35,807] - [trainer.py file line:165] - INFO: Current epoch: 83
+[2023-07-25 16:17:35,807] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 16:24:53,961] - [trainer.py file line:208] - INFO: epoch: 83	 batch: 50
+[2023-07-25 16:24:54,260] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 7.7766313553
+[2023-07-25 16:24:54,314] - [trainer.py file line:215] - INFO: psnr_loss: -28.0704421997
+[2023-07-25 16:32:21,002] - [trainer.py file line:208] - INFO: epoch: 83	 batch: 100
+[2023-07-25 16:32:21,208] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.5961551666
+[2023-07-25 16:32:21,267] - [trainer.py file line:215] - INFO: psnr_loss: -29.6723899841
+[2023-07-25 16:33:45,671] - [trainer.py file line:227] - INFO: epoch: 83	 DRTT PSNR33.70039848762862	 DRTT SSIM0.9467020573734012
+[2023-07-25 16:33:45,692] - [trainer.py file line:228] - INFO: epoch: 83	 Baseline PSNR32.88493351700833	 Baseline SSIM0.9434724152831001
+[2023-07-25 16:33:45,694] - [trainer.py file line:165] - INFO: Current epoch: 84
+[2023-07-25 16:33:45,694] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 16:41:04,904] - [trainer.py file line:208] - INFO: epoch: 84	 batch: 50
+[2023-07-25 16:41:05,194] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 3.9811162949
+[2023-07-25 16:41:05,262] - [trainer.py file line:215] - INFO: psnr_loss: -34.0737457275
+[2023-07-25 16:48:39,882] - [trainer.py file line:208] - INFO: epoch: 84	 batch: 100
+[2023-07-25 16:48:40,188] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.7845668793
+[2023-07-25 16:48:40,227] - [trainer.py file line:215] - INFO: psnr_loss: -30.5129051208
+[2023-07-25 16:50:06,429] - [trainer.py file line:227] - INFO: epoch: 84	 DRTT PSNR33.99194743336771	 DRTT SSIM0.9483198171181658
+[2023-07-25 16:50:06,556] - [trainer.py file line:228] - INFO: epoch: 84	 Baseline PSNR33.13340539894429	 Baseline SSIM0.9451467560070522
+[2023-07-25 16:50:06,557] - [trainer.py file line:165] - INFO: Current epoch: 85
+[2023-07-25 16:50:06,561] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 16:57:27,654] - [trainer.py file line:208] - INFO: epoch: 85	 batch: 50
+[2023-07-25 16:57:27,951] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.5729074478
+[2023-07-25 16:57:27,976] - [trainer.py file line:215] - INFO: psnr_loss: -30.9789619446
+[2023-07-25 17:05:03,879] - [trainer.py file line:208] - INFO: epoch: 85	 batch: 100
+[2023-07-25 17:05:04,123] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.1201376915
+[2023-07-25 17:05:04,144] - [trainer.py file line:215] - INFO: psnr_loss: -32.1698417664
+[2023-07-25 17:06:29,228] - [trainer.py file line:227] - INFO: epoch: 85	 DRTT PSNR34.22196943294616	 DRTT SSIM0.9508775607483319
+[2023-07-25 17:06:29,229] - [trainer.py file line:228] - INFO: epoch: 85	 Baseline PSNR33.44287102148241	 Baseline SSIM0.9480720168245371
+[2023-07-25 17:06:29,229] - [trainer.py file line:232] - INFO: saving the model...
+[2023-07-25 17:06:30,038] - [trainer.py file line:245] - INFO: Epoch 85 evaluation process...
+[2023-07-25 17:07:48,878] - [trainer.py file line:286] - INFO: Pipeline  PSNR (now): 32.996 	 SSIM (now): 0.9409
+[2023-07-25 17:07:49,060] - [trainer.py file line:287] - INFO: baseline  PSNR (now): 32.426 	 SSIM (now): 0.9375
+[2023-07-25 17:07:49,061] - [trainer.py file line:297] - INFO: Ref  PSNR improvement (max): 0.698 (75) 	 SSIM improvement (max): 0.0034 (85)
+[2023-07-25 17:07:49,061] - [trainer.py file line:301] - INFO: Evaluation over.
+[2023-07-25 17:07:49,299] - [trainer.py file line:165] - INFO: Current epoch: 86
+[2023-07-25 17:07:49,299] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 17:15:10,093] - [trainer.py file line:208] - INFO: epoch: 86	 batch: 50
+[2023-07-25 17:15:10,372] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 6.4538154602
+[2023-07-25 17:15:10,407] - [trainer.py file line:215] - INFO: psnr_loss: -29.7457160950
+[2023-07-25 17:22:34,129] - [trainer.py file line:208] - INFO: epoch: 86	 batch: 100
+[2023-07-25 17:22:34,602] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.8574314117
+[2023-07-25 17:22:34,727] - [trainer.py file line:215] - INFO: psnr_loss: -31.7741508484
+[2023-07-25 17:23:59,362] - [trainer.py file line:227] - INFO: epoch: 86	 DRTT PSNR33.9696277942989	 DRTT SSIM0.9486771276161527
+[2023-07-25 17:23:59,432] - [trainer.py file line:228] - INFO: epoch: 86	 Baseline PSNR33.09284951491791	 Baseline SSIM0.9453906140876577
+[2023-07-25 17:23:59,433] - [trainer.py file line:165] - INFO: Current epoch: 87
+[2023-07-25 17:23:59,434] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+[2023-07-25 17:31:20,760] - [trainer.py file line:208] - INFO: epoch: 87	 batch: 50
+[2023-07-25 17:31:21,075] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 4.8316278458
+[2023-07-25 17:31:21,297] - [trainer.py file line:215] - INFO: psnr_loss: -32.3710784912
+[2023-07-25 17:38:50,001] - [trainer.py file line:208] - INFO: epoch: 87	 batch: 100
+[2023-07-25 17:38:50,448] - [trainer.py file line:211] - INFO: ms_ssim_l1_loss: 5.5262031555
+[2023-07-25 17:38:50,518] - [trainer.py file line:215] - INFO: psnr_loss: -30.4753112793
+[2023-07-25 17:40:16,157] - [trainer.py file line:227] - INFO: epoch: 87	 DRTT PSNR34.24332449571852	 DRTT SSIM0.9500572562786329
+[2023-07-25 17:40:16,157] - [trainer.py file line:228] - INFO: epoch: 87	 Baseline PSNR33.33490016668518	 Baseline SSIM0.9468663180458631
+[2023-07-25 17:40:16,159] - [trainer.py file line:165] - INFO: Current epoch: 88
+[2023-07-25 17:40:16,159] - [trainer.py file line:166] - INFO: Current epoch learning rate: 1.000000e-05
+slurmstepd: error: *** JOB 511049 ON dgk210 CANCELLED AT 2023-07-25T17:42:21 DUE TO TIME LIMIT ***

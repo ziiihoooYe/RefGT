@@ -27,4 +27,4 @@ source /jmain02/home/J2AD007/txk47/zxy40-txk47/miniconda3/etc/profile.d/conda.sh
 conda activate DRTT
 
 #run the main code
-torchrun --standalone --nproc_per_node=8 main.py
+torchrun --standalone --nproc_per_node=8 main.py --continue_training=True --model_path=save_temp/model/model_00085.pt --num_epochs=50

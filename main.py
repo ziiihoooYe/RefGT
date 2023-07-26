@@ -17,8 +17,6 @@ warnings.filterwarnings('ignore')
 
 torch.manual_seed(1234)
 
-os.environ['TORCH_DISTRIBUTED_DEBUG'] = 'DETAIL'
-
 
 if __name__ == '__main__':
     ### init DDP
