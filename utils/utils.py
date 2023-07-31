@@ -42,7 +42,7 @@ def mkExpDir(args):
         dirs = [name for name in os.listdir(args.save_dir) if os.path.isdir(os.path.join(args.save_dir, name))]
         if dirs:
             dirs = [int(dir) for dir in dirs if dir.isdigit()]
-            max_dir = max(dirs)
+            max_dir = max(dirs) if len(dirs)>0 else 0
             args.save_dir = os.path.join(args.save_dir, "{:05d}".format(int(max_dir) + 1))
         else:
             args.save_dir = os.path.join(args.save_dir, "00000")

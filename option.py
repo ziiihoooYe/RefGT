@@ -73,7 +73,7 @@ parser.add_argument('--gamma', type=float, default=0.5,
                     help='Learning rate decay factor for step decay')
 
 ### loss setting
-parser.add_argument('--psnr_loss', type=str2bool, default=True,
+parser.add_argument('--psnr_loss', type=str2bool, default=False,
                     help='Whether to use PSNR loss')
 parser.add_argument('--ssim_loss', type=str2bool, default=False,
                     help='Whether to use SSIM loss')
@@ -86,9 +86,9 @@ parser.add_argument('--rec_loss_type', type=str, default='l1',
 ### training setting
 parser.add_argument('--batch_size', type=int, default=8,                                                             
                     help='Training batch size')
-parser.add_argument('--gt_init_epochs', type=int, default=20,
+parser.add_argument('--gt_init_epochs', type=int, default=10,
                     help='The number of ground truth init epochs')
-parser.add_argument('--num_epochs', type=int, default=130,
+parser.add_argument('--num_epochs', type=int, default=100,
                     help='The number of training epochs')
 parser.add_argument('--print_every_batch', type=int, default=50,
                     help='Print period')

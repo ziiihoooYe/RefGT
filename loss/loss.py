@@ -61,7 +61,7 @@ class DRTTLoss():
         
         self.rec_w = 0.5
         self.ssim_w = 0.2
-        self.psnr_w = 0.3
+        self.psnr_w = 0.5
         
         self.loss_dict = {}
     
