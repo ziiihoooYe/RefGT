@@ -1,7 +1,7 @@
 import os
 import sys
 
-
+os.chdir('baseline/model/Uformer')
 
 # add dir
 dir_name = os.path.dirname(os.path.abspath(__file__))
