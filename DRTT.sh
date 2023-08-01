@@ -27,4 +27,4 @@ source /jmain02/home/J2AD007/txk47/zxy40-txk47/miniconda3/etc/profile.d/conda.sh
 conda activate DRTT
 
 #run the main code
-torchrun --standalone --nproc_per_node=8 main.py 
+torchrun --standalone --nproc_per_node=8 main.py --test=True --save_dir=test_result

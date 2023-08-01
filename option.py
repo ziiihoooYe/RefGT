@@ -19,13 +19,6 @@ parser.add_argument('--log_file_name', type=str, default='DRTT.log',
 parser.add_argument('--logger_name', type=str, default='DRTT',
                     help='Logger name')
 
-### device setting
-parser.add_argument('--cpu', type=str2bool, default=False,
-                    help='Use CPU to run code')
-parser.add_argument('--num_gpu', type=int, default=8,                             
-                    ### baseline gpu index
-                    help='The number of GPU used in training')
-
 ### dataset setting
 parser.add_argument('--dataset', type=str, default='BDD100K',                                                          
                     help='Which dataset to train and test')
