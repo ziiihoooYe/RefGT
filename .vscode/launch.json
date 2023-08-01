@@ -16,6 +16,9 @@
                 "--print_every_batch=1",
                 "--save_every_epoch=1",
                 "--val_every_epoch=1",
+                // "--continue_training=True",
+                // "--model_path=save_result/BDD100K/model/model_00025.pt",
+                // "--num_epochs=50",
             ],
             "console": "integratedTerminal"
         }
