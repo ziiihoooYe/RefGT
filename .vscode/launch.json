@@ -1,21 +1,39 @@
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Debug DRTT",
+//             "type": "python",
+//             "request": "launch",
+//             "program": "~/miniconda3/envs/DRTT/bin/torchrun",
+//             "args": [
+//                 "--standalone",
+//                 "--nproc_per_node=2",
+//                 "main.py",
+//                 "--num_gpu=2",
+//                 "--batch_size=1",
+//                 "--gt_init_epochs=0",
+//                 "--print_every_batch=1",
+//                 "--save_every_epoch=1",
+//                 "--val_every_epoch=1",
+//             ],
+//             "console": "integratedTerminal"
+//         }
+//     ]
+// }
+
+// training baseline
 {
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug DRTT",
+            "name": "Training PReNet",
             "type": "python",
             "request": "launch",
-            "program": "~/miniconda3/envs/DRTT/bin/torchrun",
+            "program": "~/miniconda3/envs/DRTT/bin/python",
             "args": [
-                "--standalone",
-                "--nproc_per_node=2",
-                "main.py",
-                "--num_gpu=2",
-                "--batch_size=1",
-                "--gt_init_epochs=0",
-                "--print_every_batch=1",
-                "--save_every_epoch=1",
-                "--val_every_epoch=1",
+                "baseline/model/PReNet/train_PReNet.py",
+                "--dataset=SPA-Data",
             ],
             "console": "integratedTerminal"
         }

@@ -26,5 +26,10 @@ source /jmain02/home/J2AD007/txk47/zxy40-txk47/miniconda3/etc/profile.d/conda.sh
 #activae conda env
 conda activate DRTT
 
-#run the main code
-torchrun --standalone --nproc_per_node=8 main.py --test=True --save_dir=test_result
+# run the main code
+# torchrun --standalone --nproc_per_node=8 main.py --dataset=SPA-Data
+        #  --test=True --save_dir=test_result --model_path=save_temp/msssim0.5psnr0.3/model/model_00075.pt
+
+# cd baseline/model/PReNet
+# train baseline
+python baseline/model/PReNet/train_PReNet.py --dataset=SPA-Data

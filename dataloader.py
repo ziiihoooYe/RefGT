@@ -70,6 +70,10 @@ def get_dataloader(args):
         data_train = getattr(dataset, 'RainTrainH_train')(args)
         data_val = getattr(dataset, 'RainTrainH_val')(args)
         data_test = getattr(dataset, 'Rain100H')(args)
+    elif args.dataset == 'SPA-Data':
+        data_train = getattr(dataset, 'SPAData_train')(args)
+        data_val = getattr(dataset, 'SPAData_val')(args)
+        data_test = getattr(dataset, 'SPAData_val')(args) # TODO
     else:
         raise SystemExit('Error: no such type of dataset!')
     

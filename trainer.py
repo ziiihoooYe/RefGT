@@ -84,16 +84,16 @@ def get_noise_img(batch_size):
     return img
 
 
-def narrow_img(img, img_size):
-    output = []
-    for i in range(img.size(0)):
-        img_h = img[i].size(-2)  # (C, H, W)
-        img_start_top = img_h - img_size[i][-2]  # (H, W)
-        img_w = img[i].size(-1)
-        img_start_left = img_w - img_size[i][-1]
-        _img = img[i].narrow(1, img_start_top, img_h - img_start_top).narrow(2, img_start_left, img_w - img_start_left)
-        output.append(_img)
-    return output
+# def narrow_img(img, img_size):
+#     output = []
+#     for i in range(img.size(0)):
+#         img_h = img[i].size(-2)  # (C, H, W)
+#         img_start_top = img_h - img_size[i][-2]  # (H, W)
+#         img_w = img[i].size(-1)
+#         img_start_left = img_w - img_size[i][-1]
+#         _img = img[i].narrow(1, img_start_top, img_h - img_start_top).narrow(2, img_start_left, img_w - img_start_left)
+#         output.append(_img)
+#     return output
 
 
 ### PReNet input range (0, 1), output range (0, 1)
@@ -146,7 +146,7 @@ class Trainer:
         self.max_ssim_improve = 0.
         self.max_ssim_epoch = 0
 
-
+    # batch sample preparation
     def prepare(self, sample_batched):
         sample_batched['cl_img'] = sample_batched['cl_img'].to(self.device)
         sample_batched['rn_img'] = sample_batched['rn_img'].to(self.device)
@@ -254,6 +254,7 @@ class Trainer:
                 cl_ref = sample_batched['cl_ref']
                 rn_ref = sample_batched['rn_ref']
                 
+                # baseline deraining
                 dr_img = PReNet_derain(self.baseline, rn_img)
                 dr_ref = PReNet_derain(self.baseline, rn_ref)
 
@@ -267,15 +268,6 @@ class Trainer:
                     result_dir = os.path.join(self.args.save_dir, 'results', 'evaluation_result')
                     if not os.path.exists(result_dir):
                         os.makedirs(result_dir)
-
-                    img_sizes = sample_batched['cl_img_sizes']
-                    ref_sizes = sample_batched['cl_ref_sizes']
-                    cl_img = narrow_img(cl_img, img_sizes)
-                    rn_img = narrow_img(rn_img, img_sizes)
-                    dr_img = narrow_img(dr_img, img_sizes)
-                    dr = narrow_img(dr, img_sizes)
-                    rn_ref = narrow_img(rn_ref, ref_sizes)
-                    cl_ref = narrow_img(cl_ref, ref_sizes)
 
                     if dist.get_rank() == 0:
                         for i in range(len(cl_img)):
@@ -308,160 +300,130 @@ class Trainer:
 
         self.model.eval()
 
-        psnr, ssim, psnr_baseline, ssim_baseline = 0., 0., 0., 0.
+        _psnr, _ssim, _psnr_baseline, _ssim_baseline = 0., 0., 0., 0.
 
         with torch.no_grad():
             for i_batch, sample_batched in enumerate(self.dataloader['test']):
                 sample_batched = self.prepare(sample_batched)
                 cl_img = sample_batched['cl_img']
                 rn_img = sample_batched['rn_img']
-                # dr_img = sample_batched['dr_img']
                 cl_ref = sample_batched['cl_ref']
                 rn_ref = sample_batched['rn_ref']
-                # dr_ref = sample_batched['dr_ref']
+                
+                # baseline deraining
                 dr_img = PReNet_derain(self.baseline, rn_img)
                 dr_ref = PReNet_derain(self.baseline, rn_ref)
 
                 dr, _, _, _, _ = self.model(dr_img=dr_img, cl_ref=cl_ref, dr_ref=dr_ref)
 
-
                 ### mark down epoch matrics (PSNR, SSIM)
                 _psnr, _ssim = matrics.matrics_update(_psnr, _ssim, i_batch+1, dr.detach(), cl_img.detach())
                 _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr.detach(), cl_img.detach())
 
-                if dist.get_rank():
+                if dist.get_rank() == 0:
                     result_dir = os.path.join(self.args.save_dir, 'results', 'test_result')
 
-                if not os.path.exists(result_dir):
-                    os.makedirs(result_dir)
+                    if not os.path.exists(result_dir):
+                        os.makedirs(result_dir)
 
-                img_sizes = sample_batched['cl_img_sizes']
-                ref_sizes = sample_batched['cl_ref_sizes']
-                cl_img = narrow_img(cl_img, img_sizes)
-                rn_img = narrow_img(rn_img, img_sizes)
-                dr_img = narrow_img(dr_img, img_sizes)
-                dr = narrow_img(dr, img_sizes)
-                rn_ref = narrow_img(rn_ref, ref_sizes)
-                cl_ref = narrow_img(cl_ref, ref_sizes)
-
-                for i in range(len(cl_img)):
-                    # img_save(rn_img=rn_img[i], cl_img=cl_img[i], cl_ref=cl_ref[i], dr_img=dr_img[i], dr=dr[i],
-                    #          save_dir=os.path.join(result_dir,str(i_batch * self.args.batch_size + i).zfill(5) + '.png'))
-                    plt.imsave(os.path.join(result_dir, 'output' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
-                               tensor2img(dr[i]))
-                    plt.imsave(os.path.join(result_dir, 'baseline' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
-                               tensor2img(dr_img[i]))
-                    plt.imsave(os.path.join(result_dir, 'clean' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
-                               tensor2img(cl_img[i]))
-                    plt.imsave(os.path.join(result_dir, 'rainy' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
-                               tensor2img(rn_img[i]))
-                    plt.imsave(os.path.join(result_dir, 'ref' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
-                               tensor2img(cl_ref[i]))
+                    for i in range(len(cl_img)):
+                        # img_save(rn_img=rn_img[i], cl_img=cl_img[i], cl_ref=cl_ref[i], dr_img=dr_img[i], dr=dr[i],
+                        #          save_dir=os.path.join(result_dir,str(i_batch * self.args.batch_size + i).zfill(5) + '.png'))
+                        plt.imsave(os.path.join(result_dir, 'output' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
+                                tensor2img(dr[i]))
+                        plt.imsave(os.path.join(result_dir, 'baseline' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
+                                tensor2img(dr_img[i]))
+                        plt.imsave(os.path.join(result_dir, 'clean' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
+                                tensor2img(cl_img[i]))
+                        plt.imsave(os.path.join(result_dir, 'rainy' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
+                                tensor2img(rn_img[i]))
+                        plt.imsave(os.path.join(result_dir, 'ref' + str(i_batch * self.args.batch_size + i).zfill(5) + '.png'),
+                                tensor2img(cl_ref[i]))
 
 
-        self.logger.info('baseline Test Stage PSNR: %.3f \t SSIM: %.4f' % (psnr_baseline, ssim_baseline))
-        self.logger.info('Pipeline Test Stage PSNR: %.3f \t SSIM: %.4f' % (psnr, ssim))
+        self.logger.info('baseline Test Stage PSNR: %.3f \t SSIM: %.4f' % (_psnr_baseline, _ssim_baseline))
+        self.logger.info('Pipeline Test Stage PSNR: %.3f \t SSIM: %.4f' % (_psnr, _ssim))
         self.logger.info('Test Stage PSNR improvement: %.4f, \t %.2f on the baseline model' % (
-            psnr - psnr_baseline, (psnr - psnr_baseline) / psnr_baseline * 100))
+            _psnr - _psnr_baseline, (_psnr - _psnr_baseline) / _psnr_baseline * 100))
         self.logger.info('Test Stage SSIM improvement: %.4f, \t %.2f on the baseline model' % (
-            ssim - ssim_baseline, (ssim - ssim_baseline) / ssim_baseline * 100))
+            _ssim - _ssim_baseline, (_ssim - _ssim_baseline) / _ssim_baseline * 100))
         self.logger.info('output path: %s' % result_dir)
         self.logger.info('Test Over.')
 
-    # def compare_test(self):
+    def compare_test(self):
 
-    #     self.logger.info('Test process...')
+        self.logger.info('Test process...')
 
-    #     self.model.eval()
-    #     psnr_gt, ssim_gt = 0., 0.  # ground truth matrix
-    #     psnr_ref, ssim_ref = 0., 0.  # reference matrix
-    #     psnr_noise, ssim_noise = 0., 0.  # noise matrix
-    #     psnr_baseline, ssim_baseline = 0., 0.  # baseline matrix
+        self.model.eval()
+        _psnr_gt, _ssim_gt = 0., 0.  # ground truth matrix
+        _psnr_ref, _ssim_ref = 0., 0.  # reference matrix
+        _psnr_noise, _ssim_noise = 0., 0.  # noise matrix
+        _psnr_baseline, _ssim_baseline = 0., 0.  # baseline matrix
 
-    #     with torch.no_grad():
-    #         for i_batch, sample_batched in enumerate(self.dataloader['test']):
-    #             sample_batched = self.prepare(sample_batched)
-    #             cl_img = sample_batched['cl_img']
-    #             # dr_img = sample_batched['dr_img']
-    #             rn_img = sample_batched['rn_img']
-    #             cl_ref = sample_batched['cl_ref']
-    #             # dr_ref = sample_batched['dr_ref']
-    #             rn_ref = sample_batched['rn_ref']
-    #             dr_img = PReNet_derain(self.baseline, rn_img)
-    #             dr_ref = PReNet_derain(self.baseline, rn_ref)
-    #             noise = get_noise_img(cl_img.size(0)).to(dr_img.device)
+        with torch.no_grad():
+            for i_batch, sample_batched in enumerate(self.dataloader['test']):
+                sample_batched = self.prepare(sample_batched)
+                cl_img = sample_batched['cl_img']
+                rn_img = sample_batched['rn_img']
+                cl_ref = sample_batched['cl_ref']
+                rn_ref = sample_batched['rn_ref']
+                
+                # baseline deraining
+                dr_img = PReNet_derain(self.baseline, rn_img)
+                dr_ref = PReNet_derain(self.baseline, rn_ref)
+                
+                noise = get_noise_img(cl_img.size(0)).to(dr_img.device)
 
-    #             ### ground truth reference
-    #             dr_gt, S_gt, T_gt_lv3, T_gt_lv2, T_gt_lv1 = self.model(dr_img=dr_img, cl_ref=cl_img, dr_ref=dr_img)
+                ### ground truth reference
+                dr_gt, S_gt, T_gt_lv3, T_gt_lv2, T_gt_lv1 = self.model(dr_img=dr_img, cl_ref=cl_img, dr_ref=dr_img)
 
-    #             ### reference
-    #             dr_ref, S_ref, T_ref_lv3, T_ref_lv2, T_ref_lv1 = self.model(dr_img=dr_img, cl_ref=cl_ref,
-    #                                                                         dr_ref=dr_ref)
+                ### reference
+                dr_ref, S_ref, T_ref_lv3, T_ref_lv2, T_ref_lv1 = self.model(dr_img=dr_img, cl_ref=cl_ref, dr_ref=dr_ref)
 
-    #             ### reference
-    #             dr_noise, S_n, T_n_lv3, T_n_lv2, T_n_lv1 = self.model(dr_img=dr_img, cl_ref=noise, dr_ref=noise)
+                ### noise reference
+                dr_noise, S_n, T_n_lv3, T_n_lv2, T_n_lv1 = self.model(dr_img=dr_img, cl_ref=noise, dr_ref=noise)
 
-    #             if dist.get_rank():
-    #                 result_dir = os.path.join(self.args.save_dir, 'results', 'test result')
-    #                 if not os.path.exists(result_dir):
-    #                     os.makedirs(result_dir)
+                if dist.get_rank() == 0:
+                    result_dir = os.path.join(self.args.save_dir, 'results', 'test result')
+                    if not os.path.exists(result_dir):
+                        os.makedirs(result_dir)
                         
-    #                 for i in range(cl_img.size()[0]):
-    #                     compare_img_save(rn_img=rn_img[i], dr_baseline=dr_img[i], gt=cl_img[i], ref=cl_ref[i],
-    #                                     noise=noise[i], dr_gt=dr_gt[i], dr_ref=dr_ref[i],
-    #                                     dr_noise=dr_noise[i],
-    #                                     save_dir=os.path.join(result_dir,
-    #                                                         str(i_batch * self.args.batch_size + i).zfill(5) + '.png'))
+                    for i in range(cl_img.size()[0]):
+                        compare_img_save(rn_img=rn_img[i], dr_baseline=dr_img[i], gt=cl_img[i], ref=cl_ref[i],
+                                        noise=noise[i], dr_gt=dr_gt[i], dr_ref=dr_ref[i],
+                                        dr_noise=dr_noise[i],
+                                        save_dir=os.path.join(result_dir,
+                                                            str(i_batch * self.args.batch_size + i).zfill(5) + '.png'))
 
-    #             _psnr_gt, _ssim_gt = calc_psnr_and_ssim(dr_gt.detach(), cl_img.detach())
-    #             _psnr_ref, _ssim_ref = calc_psnr_and_ssim(dr_ref.detach(), cl_img.detach())
-    #             _psnr_noise, _ssim_noise = calc_psnr_and_ssim(dr_noise.detach(), cl_img.detach())
-    #             _psnr_baseline, _ssim_baseline = calc_psnr_and_ssim(dr_img.detach(), cl_img.detach())
+                # update matrics
+                _psnr_gt, _ssim_gt=  matrics.matrics_update(_psnr_gt, _ssim_gt, i_batch+1, dr_gt.detach(), cl_img.detach())
+                _psnr_ref, _ssim_ref = matrics.matrics_update(_psnr_ref, _ssim_ref, i_batch+1, dr_ref.detach(), cl_img.detach())
+                _psnr_noise, _ssim_noise = matrics.matrics_update(_psnr_noise, _ssim_noise, i_batch+1, dr_noise.detach(), cl_img.detach())
+                _psnr_baseline, _ssim_baseline = matrics.matrics_update(_psnr_baseline, _ssim_baseline, i_batch+1, dr_img.detach(), cl_img.detach())
 
-    #             psnr_gt += _psnr_gt
-    #             ssim_gt += _ssim_gt
+        self.logger.info('baseline Test Stage PSNR: %.3f \t SSIM: %.4f' % (_psnr_baseline, _ssim_baseline))
 
-    #             psnr_ref += _psnr_ref
-    #             ssim_ref += _ssim_ref
+        self.logger.info('Clean Image Referencing PSNR: %.3f \t SSIM: %.4f' % (_psnr_gt, _ssim_gt))
+        self.logger.info('Reference Image Referencing PSNR: %.3f \t SSIM: %.4f' % (_psnr_ref, _ssim_ref))
+        self.logger.info('Noise Referencing PSNR: %.3f \t SSIM: %.4f' % (_psnr_noise, _ssim_noise))
 
-    #             psnr_noise += _psnr_noise
-    #             ssim_noise += _ssim_noise
+        self.logger.info('Clean Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _psnr_gt - _psnr_baseline, (_psnr_gt - _psnr_baseline) / _psnr_baseline * 100))
+        self.logger.info('Clean Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _ssim_gt - _ssim_baseline, (_ssim_gt - _ssim_baseline) / _ssim_baseline * 100))
 
-    #             psnr_baseline += _psnr_baseline
-    #             ssim_baseline += _ssim_baseline
+        self.logger.info('Reference Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _psnr_ref - _psnr_baseline, (_psnr_ref - _psnr_baseline) / _psnr_baseline * 100))
+        self.logger.info('Reference Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _ssim_ref - _ssim_baseline, (_ssim_ref - _ssim_baseline) / _ssim_baseline * 100))
 
-    #     psnr_gt = psnr_gt / len(self.dataloader['test'])
-    #     ssim_gt = ssim_gt / len(self.dataloader['test'])
-    #     psnr_ref = psnr_ref / len(self.dataloader['test'])
-    #     ssim_ref = ssim_ref / len(self.dataloader['test'])
-    #     psnr_noise = psnr_noise / len(self.dataloader['test'])
-    #     ssim_noise = ssim_noise / len(self.dataloader['test'])
-    #     psnr_baseline = psnr_baseline / len(self.dataloader['test'])
-    #     ssim_baseline = ssim_baseline / len(self.dataloader['test'])
+        self.logger.info('Noise Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _psnr_noise - _psnr_baseline, (_psnr_noise - _psnr_baseline) / _psnr_baseline * 100))
+        self.logger.info('Noise Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
+            _ssim_noise - _ssim_baseline, (_ssim_noise - _ssim_baseline) / _ssim_baseline * 100))
 
-    #     self.logger.info('baseline Test Stage PSNR: %.3f \t SSIM: %.4f' % (psnr_baseline, ssim_baseline))
-
-    #     self.logger.info('Clean Image Referencing PSNR: %.3f \t SSIM: %.4f' % (psnr_gt, ssim_gt))
-    #     self.logger.info('Reference Image Referencing PSNR: %.3f \t SSIM: %.4f' % (psnr_ref, ssim_ref))
-    #     self.logger.info('Noise Referencing PSNR: %.3f \t SSIM: %.4f' % (psnr_noise, ssim_noise))
-
-    #     self.logger.info('Clean Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         psnr_gt - psnr_baseline, (psnr_gt - psnr_baseline) / psnr_baseline * 100))
-    #     self.logger.info('Clean Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         ssim_gt - ssim_baseline, (ssim_gt - ssim_baseline) / ssim_baseline * 100))
-
-    #     self.logger.info('Reference Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         psnr_ref - psnr_baseline, (psnr_ref - psnr_baseline) / psnr_baseline * 100))
-    #     self.logger.info('Reference Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         ssim_ref - ssim_baseline, (ssim_ref - ssim_baseline) / ssim_baseline * 100))
-
-    #     self.logger.info('Noise Image Referencing PSNR improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         psnr_noise - psnr_baseline, (psnr_noise - psnr_baseline) / psnr_baseline * 100))
-    #     self.logger.info('Noise Image Referencing SSIM improvement: %.4f, \t %.2f%% on the baseline model' % (
-    #         ssim_noise - ssim_baseline, (ssim_noise - ssim_baseline) / ssim_baseline * 100))
-
-    #     self.logger.info('output path: %s' % (result_dir))
-    #     self.logger.info('Test Over.')
+        self.logger.info('output path: %s' % (result_dir))
+        self.logger.info('Test Over.')
 
 
 

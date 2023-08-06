@@ -1,5 +1,7 @@
 import os
 import sys
+print(os.getcwd())
+print(os.path())
 sys.path.append(os.path.join(os.getcwd(), '../../..'))
 import argparse
 import numpy as np
@@ -9,7 +11,6 @@ import torch.optim as optim
 import torchvision.utils as utils
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
-from tensorboardX import SummaryWriter
 # from DerainDataset import *
 from utils.utils import *
 from torch.optim.lr_scheduler import MultiStepLR
@@ -80,7 +81,7 @@ def main():
     scheduler = MultiStepLR(optimizer, milestones=args.milestone, gamma=0.2)  # learning rates
 
     # record training
-    writer = SummaryWriter(args.save_path)
+    # writer = SummaryWriter(args.save_path)
 
     # load the lastest model
     initial_epoch = findLastCheckpoint(save_dir=args.save_path)

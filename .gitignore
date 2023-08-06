@@ -7,6 +7,9 @@
 /data/Rain100H/
 /data/RainTrainH/
 /data/RainTrainL/
+/data/SPA-Data/
+/data/SPA-Data-test/
+#ignore result
 /save_result/
 /test_result/
 # 默认忽略的文件
