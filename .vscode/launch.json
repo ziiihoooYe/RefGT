@@ -30,9 +30,8 @@
             "name": "Training PReNet",
             "type": "python",
             "request": "launch",
-            "program": "~/miniconda3/envs/DRTT/bin/python",
+            "program": "baseline/model/PReNet/train_PReNet.py",
             "args": [
-                "baseline/model/PReNet/train_PReNet.py",
                 "--dataset=SPA-Data",
             ],
             "console": "integratedTerminal"

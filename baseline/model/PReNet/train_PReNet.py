@@ -1,8 +1,6 @@
 import os
 import sys
-print(os.getcwd())
-print(os.path())
-sys.path.append(os.path.join(os.getcwd(), '../../..'))
+sys.path.append(os.getcwd())
 import argparse
 import numpy as np
 import torch
@@ -64,7 +62,7 @@ def main():
 
     # Build model
     model = PReNet(recurrent_iter=args.recurrent_iter, use_GPU=args.use_gpu)
-    print_network(model)
+    # print_network(model)
 
     # loss function
     criterion = SSIM()
@@ -129,11 +127,11 @@ def main():
             print("[epoch %d][%d/%d] loss: %.4f, pixel_metric: %.4f, PSNR: %.4f" %
                   (epoch+1, i+1, len(dataloader['train']), loss.item(), pixel_metric.item(), psnr_train))
 
-            if step % 10 == 0:
-                # Log the scalar values
-                writer.add_scalar('loss', loss.item(), step)
-                writer.add_scalar('PSNR on training data', psnr_train, step)
-            step += 1
+            # if step % 10 == 0:
+            #     # Log the scalar values
+            #     writer.add_scalar('loss', loss.item(), step)
+            #     writer.add_scalar('PSNR on training data', psnr_train, step)
+            # step += 1
         ## epoch training end
 
         # log the images
