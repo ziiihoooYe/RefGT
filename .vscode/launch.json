@@ -33,6 +33,7 @@
             "program": "baseline/model/PReNet/train_PReNet.py",
             "args": [
                 "--dataset=SPA-Data",
+                "--dataset_dir=data"
             ],
             "console": "integratedTerminal"
         }

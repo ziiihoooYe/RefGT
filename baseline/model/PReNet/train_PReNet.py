@@ -1,6 +1,8 @@
 import os
 import sys
 sys.path.append(os.getcwd())
+sys.path.append(os.path.join(os.getcwd(), 'baseline/model/PReNet'))
+os.chdir('baseline/model/PReNet')
 import argparse
 import numpy as np
 import torch
@@ -9,13 +11,14 @@ import torch.optim as optim
 import torchvision.utils as utils
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
-# from DerainDataset import *
+# from DerainDataset i#mport *
 from utils.utils import *
 from torch.optim.lr_scheduler import MultiStepLR
-from SSIM import SSIM
+from loss.SSIM import SSIM
 from networks import *
 from option import parser
 from dataloader import get_dataloader
+# os.chdir('../../..')
 
 parser.add_argument("--preprocess", type=bool, default=True, help='run prepare_data or not')
 parser.add_argument("--epochs", type=int, default=20, help="Number of training epochs")
