@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from loss.MS_SSIM_L1_loss import MS_SSIM_L1_LOSS
 from loss.SSIM import SSIM
-from utils import distributed as dist
+from torch_utils import distributed as dist
 
 
 class ReconstructionLoss(nn.Module):

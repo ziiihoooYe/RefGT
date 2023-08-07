@@ -16,7 +16,7 @@ sys.path.append(os.path.join(dir_name,'..'))
 
 import scipy.io as sio
 from dataset.dataset_denoise import *
-import utils
+import torch_utils
 import math
 from model import UNet,Uformer
 
@@ -59,18 +59,18 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
 
 result_dir_mat = os.path.join(args.result_dir, 'mat')
-utils.mkdir(result_dir_mat)
+torch_utils.mkdir(result_dir_mat)
 
 # if args.save_images:
 result_dir_img = os.path.join(args.result_dir, 'png')
-utils.mkdir(result_dir_img)
+torch_utils.mkdir(result_dir_img)
 
 # test_dataset = get_validation_data(args.input_dir)
 # test_loader = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=8, drop_last=False)
 
-model_restoration= utils.get_arch(args)
+model_restoration= torch_utils.get_arch(args)
 
-utils.load_checkpoint(model_restoration,args.weights)
+torch_utils.load_checkpoint(model_restoration,args.weights)
 print("===>Testing using weights: ", args.weights)
 
 model_restoration.cuda()
@@ -110,7 +110,7 @@ with torch.no_grad():
             restored[i,k,:,:,:] = restored_patch
 
             save_file = os.path.join(result_dir_img, '%04d_%02d.png'%(i+1,k+1))
-            utils.save_img(save_file, img_as_ubyte(restored_patch))
+            torch_utils.save_img(save_file, img_as_ubyte(restored_patch))
 
 # save denoised data
 sio.savemat(os.path.join(result_dir_mat, 'Idenoised.mat'), {"Idenoised": restored,})

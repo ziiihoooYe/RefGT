@@ -16,7 +16,7 @@ sys.path.append(os.path.join(dir_name,'..'))
 
 import scipy.io as sio
 from dataset.dataset_motiondeblur import *
-import utils
+import torch_utils
 
 from model import UNet,Uformer
 
@@ -59,15 +59,15 @@ args = parser.parse_args()
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
 
-utils.mkdir(args.result_dir)
+torch_utils.mkdir(args.result_dir)
 
 test_dataset = get_validation_deblur_data(args.input_dir)
 test_loader = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=8, drop_last=False)
 
-model_restoration= utils.get_arch(args)
+model_restoration= torch_utils.get_arch(args)
 # model_restoration = torch.nn.DataParallel(model_restoration)
 
-utils.load_checkpoint(model_restoration,args.weights)
+torch_utils.load_checkpoint(model_restoration,args.weights)
 print("===>Testing using weights: ", args.weights)
 
 model_restoration.cuda()
@@ -107,7 +107,7 @@ with torch.no_grad():
         psnr_val_rgb.append(psnr)
         ssim_val_rgb.append(ssim)
         print("PSNR:",psnr,", SSIM:", ssim, filenames[0], rgb_restored.shape)
-        utils.save_img(os.path.join(args.result_dir,filenames[0]+'.PNG'), img_as_ubyte(rgb_restored))
+        torch_utils.save_img(os.path.join(args.result_dir,filenames[0]+'.PNG'), img_as_ubyte(rgb_restored))
         with open(os.path.join(args.result_dir,'psnr_ssim.txt'),'a') as f:
             f.write(filenames[0]+'.PNG ---->'+"PSNR: %.4f, SSIM: %.4f] "% (psnr, ssim)+'\n')
 psnr_val_rgb = sum(psnr_val_rgb)/len(test_dataset)

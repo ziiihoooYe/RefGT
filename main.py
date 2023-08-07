@@ -4,13 +4,13 @@ import warnings
 
 
 from option import args
-from utils.utils import mkExpDir, load_model
+from torch_utils.utils import mkExpDir, load_model
 from dataloader import get_dataloader
 from model import DRTT
-from loss.loss import get_loss_dict
+from derain_loss.loss import get_loss_dict
 from importlib import import_module
 from trainer import Trainer
-import utils.distributed as dist
+import torch_utils.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 warnings.filterwarnings('ignore')

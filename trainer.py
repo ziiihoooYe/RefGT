@@ -6,8 +6,8 @@ import torch.optim as optim
 import numpy as np
 import matplotlib.pyplot as plt
 
-import utils.matrics as matrics
-import utils.distributed as dist
+import torch_utils.matrics as matrics
+import torch_utils.distributed as dist
 
 
 # tensor (-1, 1) -> img (0, 255)

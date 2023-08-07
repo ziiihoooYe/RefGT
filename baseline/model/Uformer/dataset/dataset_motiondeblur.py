@@ -2,7 +2,7 @@ import numpy as np
 import os
 from torch.utils.data import Dataset
 import torch
-from utils import is_png_file, load_img, Augment_RGB_torch
+from torch_utils import is_png_file, load_img, Augment_RGB_torch
 import torch.nn.functional as F
 import random
 from PIL import Image

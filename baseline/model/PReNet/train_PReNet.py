@@ -1,8 +1,8 @@
 import os
 import sys
-sys.path.append(os.getcwd())
-print(sys.path)
-print(os.getcwd())
+# sys.path.append(os.getcwd())
+# print(sys.path)
+# print(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'baseline/model/PReNet'))
 # os.chdir('baseline/model/PReNet')
 import argparse
@@ -15,12 +15,12 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 # from DerainDataset i#mport *
 from torch.optim.lr_scheduler import MultiStepLR
-from loss.SSIM import SSIM
+from derain_loss.SSIM import SSIM
 from networks import *
 from option import parser
 from dataloader import get_dataloader
-from utils.utils import *
-from utils.matrics import matrics_update
+from torch_utils.utils import *
+from torch_utils.matrics import matrics_update
 # os.chdir('../../..')
 
 parser.add_argument("--preprocess", type=bool, default=True, help='run prepare_data or not')
@@ -34,7 +34,7 @@ parser.add_argument("--gpu_id", type=str, default="0", help='GPU id')
 parser.add_argument("--recurrent_iter", type=int, default=6, help='number of recursive stages')
 args = parser.parse_args()
 args.patch_size = 8
-args.dataset_dir = os.path.join('../../..', args.dataset_dir)
+# args.dataset_dir = os.path.join('../../..', args.dataset_dir)
 
 if args.use_gpu:
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"

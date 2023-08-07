@@ -1,7 +1,7 @@
 import os
 import logging
 import torch
-import utils.distributed as dist
+import torch_utils.distributed as dist
 
 
 class Logger(object):
