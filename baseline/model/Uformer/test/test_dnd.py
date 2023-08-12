@@ -17,7 +17,7 @@ sys.path.append(os.path.join(dir_name,'..'))
 
 import scipy.io as sio
 from dataset.dataset_denoise import *
-import torch_utils
+import utils
 
 from model import UNet,Uformer
 
@@ -61,16 +61,16 @@ args = parser.parse_args()
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
 
-torch_utils.mkdir(os.path.join(args.result_dir,'matfile'))
-torch_utils.mkdir(os.path.join(args.result_dir,'png'))
+utils.mkdir(os.path.join(args.result_dir,'matfile'))
+utils.mkdir(os.path.join(args.result_dir,'png'))
 
 test_dataset = get_test_data(args.input_dir)
 test_loader = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=8, drop_last=False)
 
-model_restoration= torch_utils.get_arch(args)
+model_restoration= utils.get_arch(args)
 model_restoration = torch.nn.DataParallel(model_restoration)
 
-torch_utils.load_checkpoint(model_restoration,args.weights)
+utils.load_checkpoint(model_restoration,args.weights)
 print("===>Testing using weights: ", args.weights)
 
 model_restoration.cuda()
@@ -104,7 +104,7 @@ with torch.no_grad():
 
         denoised_img = img_as_ubyte(rgb_restored)
         print(filenames[0])
-        torch_utils.save_img(os.path.join(args.result_dir,'png/',filenames[0]+ '.png'), denoised_img)
+        utils.save_img(os.path.join(args.result_dir,'png/',filenames[0]+ '.png'), denoised_img)
         save_file = os.path.join(args.result_dir,'matfile/', filenames[0] +'.mat')
         sio.savemat(save_file, {'Idenoised_crop': np.float32(rgb_restored)})
 

@@ -6,8 +6,8 @@ import torch.optim as optim
 import numpy as np
 import matplotlib.pyplot as plt
 
-import torch_utils.matrics as matrics
-import torch_utils.distributed as dist
+import utils.matrics as matrics
+import utils.distributed as dist
 
 
 # tensor (-1, 1) -> img (0, 255)
@@ -147,12 +147,12 @@ class Trainer:
         self.max_ssim_epoch = 0
 
     # batch sample preparation
-    def prepare(self, sample_batched):
-        sample_batched['cl_img'] = sample_batched['cl_img'].to(self.device)
-        sample_batched['rn_img'] = sample_batched['rn_img'].to(self.device)
-        sample_batched['cl_ref'] = sample_batched['cl_ref'].to(self.device)
-        sample_batched['rn_ref'] = sample_batched['rn_ref'].to(self.device)
-        return sample_batched
+    def prepare(self, sample_batch):
+        sample_batch['cl_img'] = sample_batch['cl_img'].to(self.device)
+        sample_batch['rn_img'] = sample_batch['rn_img'].to(self.device)
+        sample_batch['cl_ref'] = sample_batch['cl_ref'].to(self.device)
+        sample_batch['rn_ref'] = sample_batch['rn_ref'].to(self.device)
+        return sample_batch
     
     
     def train(self, current_epoch=0, is_init=False):
@@ -168,16 +168,16 @@ class Trainer:
         ### initialize evaluation matrics
         _psnr, _ssim, _psnr_baseline, _ssim_baseline = 0., 0., 0., 0.
 
-        for i_batch, sample_batched in enumerate(self.dataloader['train']):
+        for i_batch, sample_batch in enumerate(self.dataloader['train']):
             self.optimizer.zero_grad(set_to_none=True)
 
             ### prepare sample batch -> to gpu device
-            sample_batched = self.prepare(sample_batched)
+            sample_batch = self.prepare(sample_batch)
 
-            cl_img = sample_batched['cl_img']
-            rn_img = sample_batched['rn_img']
-            cl_ref = sample_batched['cl_ref']
-            rn_ref = sample_batched['rn_ref']
+            cl_img = sample_batch['cl_img']
+            rn_img = sample_batch['rn_img']
+            cl_ref = sample_batch['cl_ref']
+            rn_ref = sample_batch['rn_ref']
             
             #baseline pre-derain
             dr_img = PReNet_derain(self.baseline, rn_img).detach()
@@ -247,12 +247,12 @@ class Trainer:
         self.model.eval()
         with torch.no_grad():
             _psnr, _ssim, _psnr_baseline, _ssim_baseline = 0., 0., 0., 0.
-            for i_batch, sample_batched in enumerate(self.dataloader['val']):
-                sample_batched = self.prepare(sample_batched)
-                cl_img = sample_batched['cl_img']
-                rn_img = sample_batched['rn_img']
-                cl_ref = sample_batched['cl_ref']
-                rn_ref = sample_batched['rn_ref']
+            for i_batch, sample_batch in enumerate(self.dataloader['val']):
+                sample_batch = self.prepare(sample_batch)
+                cl_img = sample_batch['cl_img']
+                rn_img = sample_batch['rn_img']
+                cl_ref = sample_batch['cl_ref']
+                rn_ref = sample_batch['rn_ref']
                 
                 # baseline deraining
                 dr_img = PReNet_derain(self.baseline, rn_img)
@@ -303,12 +303,12 @@ class Trainer:
         _psnr, _ssim, _psnr_baseline, _ssim_baseline = 0., 0., 0., 0.
 
         with torch.no_grad():
-            for i_batch, sample_batched in enumerate(self.dataloader['test']):
-                sample_batched = self.prepare(sample_batched)
-                cl_img = sample_batched['cl_img']
-                rn_img = sample_batched['rn_img']
-                cl_ref = sample_batched['cl_ref']
-                rn_ref = sample_batched['rn_ref']
+            for i_batch, sample_batch in enumerate(self.dataloader['test']):
+                sample_batch = self.prepare(sample_batch)
+                cl_img = sample_batch['cl_img']
+                rn_img = sample_batch['rn_img']
+                cl_ref = sample_batch['cl_ref']
+                rn_ref = sample_batch['rn_ref']
                 
                 # baseline deraining
                 dr_img = PReNet_derain(self.baseline, rn_img)
@@ -361,12 +361,12 @@ class Trainer:
         _psnr_baseline, _ssim_baseline = 0., 0.  # baseline matrix
 
         with torch.no_grad():
-            for i_batch, sample_batched in enumerate(self.dataloader['test']):
-                sample_batched = self.prepare(sample_batched)
-                cl_img = sample_batched['cl_img']
-                rn_img = sample_batched['rn_img']
-                cl_ref = sample_batched['cl_ref']
-                rn_ref = sample_batched['rn_ref']
+            for i_batch, sample_batch in enumerate(self.dataloader['test']):
+                sample_batch = self.prepare(sample_batch)
+                cl_img = sample_batch['cl_img']
+                rn_img = sample_batch['rn_img']
+                cl_ref = sample_batch['cl_ref']
+                rn_ref = sample_batch['rn_ref']
                 
                 # baseline deraining
                 dr_img = PReNet_derain(self.baseline, rn_img)

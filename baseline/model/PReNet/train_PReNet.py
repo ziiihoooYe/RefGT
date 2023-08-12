@@ -3,7 +3,8 @@ import sys
 # sys.path.append(os.getcwd())
 # print(sys.path)
 # print(os.getcwd())
-sys.path.append(os.path.join(os.getcwd(), 'baseline/model/PReNet'))
+sys.path.insert(0, os.getcwd())
+sys.path.insert(1, os.path.join(os.getcwd(), 'baseline/model/PReNet'))
 # os.chdir('baseline/model/PReNet')
 import argparse
 import numpy as np
@@ -15,23 +16,25 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 # from DerainDataset i#mport *
 from torch.optim.lr_scheduler import MultiStepLR
-from derain_loss.SSIM import SSIM
+from loss.SSIM import SSIM
 from networks import *
 from option import parser
 from dataloader import get_dataloader
-from torch_utils.utils import *
-from torch_utils.matrics import matrics_update
+from utils.utils import *
+from utils.matrics import matrics_update
 # os.chdir('../../..')
 
 parser.add_argument("--preprocess", type=bool, default=True, help='run prepare_data or not')
 parser.add_argument("--epochs", type=int, default=20, help="Number of training epochs")
 parser.add_argument("--milestone", type=int, default=[6, 10, 16], help="When to decay learning rate")
 parser.add_argument("--lr", type=float, default=1e-3, help="initial learning rate")
-parser.add_argument("--save_path", type=str, default="../../state_dict/PReNet6/BDD100K", help='path to save models and log files')
+parser.add_argument("--save_path", type=str, default="baseline/state_dict/PReNet6/SPA-Data", help='path to save models and log files')
 parser.add_argument("--save_freq",type=int,default=5, help='save intermediate model')
 parser.add_argument("--use_gpu", type=bool, default=True, help='use GPU or not')
 parser.add_argument("--gpu_id", type=str, default="0", help='GPU id')
 parser.add_argument("--recurrent_iter", type=int, default=6, help='number of recursive stages')
+parser.add_argument('--num_gpu', type=int, default=8)
+parser.add_argument('--resume', type=bool, default=False)
 args = parser.parse_args()
 args.patch_size = 8
 # args.dataset_dir = os.path.join('../../..', args.dataset_dir)
@@ -75,7 +78,7 @@ def main():
 
     # Move to GPU
     if args.use_gpu:
-        if (not args.cpu) and (args.num_gpu > 1):
+        if args.num_gpu > 1:
             model = nn.DataParallel(model, list(range(args.num_gpu)))
         model = model.cuda()
         criterion = criterion.cuda()
@@ -114,7 +117,6 @@ def main():
             input_train = (input_train + 1.) / 2  # (-1, 1) -> (0, 1)
             target_train = sampled_batch['cl_img']  # (-1, 1)
             target_train = (target_train + 1.) / 2  # (-1, 1) -> (0, 1)
-            img_sizes = sampled_batch['rn_img_sizes']
             model.train()
             model.zero_grad()
             optimizer.zero_grad()

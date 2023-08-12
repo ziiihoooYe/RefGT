@@ -27,7 +27,4 @@ source /jmain02/home/J2AD007/txk47/zxy40-txk47/miniconda3/etc/profile.d/conda.sh
 conda activate DRTT
 
 # run the main code
-torchrun --standalone --nproc_per_node=8 main.py --dataset=SPA-Data --baseline_state_dir=baseline/state_dict/PReNet6/SPA-Data/net_latest.pth \
-        --continue_training=True --model_path=save_temp/00002/model/model_00005.pt \
-        # --test=True --save_dir=test_result --model_path=save_temp/msssim0.5psnr0.3/model/model_00075.pt
-
+python baseline/model/PReNet/train_PReNet.py --dataset=SPA-Data --dataset_dir=data 

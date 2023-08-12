@@ -1,5 +1,6 @@
 from torch.utils.data import DataLoader
 from importlib import import_module
+import torch.distributed as dist
 import torch
 import math
 import os
@@ -77,26 +78,27 @@ def get_dataloader(args):
     else:
         raise SystemExit('Error: no such type of dataset!')
     
-    #construct DDP smapler
-    sampler_train = torch.utils.data.distributed.DistributedSampler(data_train)
-    sampler_test = torch.utils.data.distributed.DistributedSampler(data_test)
-    sampler_val = torch.utils.data.distributed.DistributedSampler(data_val)
-        
-    #construct dataloader
-    # dataloader_train = DataLoader(data_train, batch_size=args.batch_size,
-    #                               num_workers=args.num_workers, sampler=sampler_train)
-    # dataloader_test = DataLoader(data_test, batch_size=args.batch_size,
-    #                              num_workers=args.num_workers, sampler=sampler_test)
-    # dataloader_val = DataLoader(data_val, batch_size=args.batch_size,
-    #                             num_workers=args.num_workers, sampler=sampler_val)
-    
-    # baseline training (without ddp)
-    dataloader_train = DataLoader(data_train, batch_size=args.batch_size,
-                                  num_workers=args.num_workers)
-    dataloader_test = DataLoader(data_test, batch_size=args.batch_size,
-                                 num_workers=args.num_workers)
-    dataloader_val = DataLoader(data_val, batch_size=args.batch_size,
-                                num_workers=args.num_workers)
+    if dist.is_initialized():
+        #construct DDP smapler
+        sampler_train = torch.utils.data.distributed.DistributedSampler(data_train)
+        sampler_test = torch.utils.data.distributed.DistributedSampler(data_test)
+        sampler_val = torch.utils.data.distributed.DistributedSampler(data_val)
+            
+        # construct dataloader
+        dataloader_train = DataLoader(data_train, batch_size=args.batch_size,
+                                    num_workers=args.num_workers, sampler=sampler_train)
+        dataloader_test = DataLoader(data_test, batch_size=args.batch_size,
+                                    num_workers=args.num_workers, sampler=sampler_test)
+        dataloader_val = DataLoader(data_val, batch_size=args.batch_size,
+                                    num_workers=args.num_workers, sampler=sampler_val)
+    else:
+        # baseline training (without ddp)
+        dataloader_train = DataLoader(data_train, batch_size=args.batch_size,
+                                    num_workers=args.num_workers)
+        dataloader_test = DataLoader(data_test, batch_size=args.batch_size,
+                                    num_workers=args.num_workers)
+        dataloader_val = DataLoader(data_val, batch_size=args.batch_size,
+                                    num_workers=args.num_workers)
     
     dataloader = {'train': dataloader_train, 'test': dataloader_test, 'val': dataloader_val}
 

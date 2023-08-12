@@ -15,7 +15,7 @@ sys.path.append(os.path.join(dir_name,'..'))
 from skimage import img_as_ubyte,io
 from pdb import set_trace as stx
 from dataset.dataset_motiondeblur import *
-import torch_utils
+import utils
 import math
 
 from glob import glob
@@ -157,9 +157,9 @@ def proc(filename):
 
 
 if __name__ == "__main__":
-    model_restoration = torch_utils.get_arch(args)
+    model_restoration = utils.get_arch(args)
 
-    torch_utils.load_checkpoint(model_restoration,args.weights)
+    utils.load_checkpoint(model_restoration,args.weights)
     print("===>Testing using weights: ",args.weights)
     model_restoration.cuda()
     model_restoration.eval()
@@ -169,7 +169,7 @@ if __name__ == "__main__":
         test_loader  = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=4, drop_last=False, pin_memory=False)
 
         result_dir  = os.path.join(args.result_dir, dataset, args.arch)
-        torch_utils.mkdir(result_dir)
+        utils.mkdir(result_dir)
 
 
         with torch.no_grad():
@@ -187,7 +187,7 @@ if __name__ == "__main__":
                 restored = torch.masked_select(restored,mask.bool()).reshape(1,3,h,w)
                 restored = torch.clamp(restored,0,1).cpu().numpy().squeeze().transpose((1,2,0))
                 print(filenames, restored.shape)
-                torch_utils.save_img(os.path.join(result_dir,filenames[0]+'.png'), img_as_ubyte(restored))
+                utils.save_img(os.path.join(result_dir,filenames[0]+'.png'), img_as_ubyte(restored))
     
     ## evaluate
     results = {}

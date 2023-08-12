@@ -1,28 +1,30 @@
 import os
 import sys
 
+# os.chdir('baseline/model/Uformer')
+
 # add dir
 dir_name = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(dir_name,'../dataset/'))
-sys.path.append(os.path.join(dir_name,'..'))
+sys.path.insert(0, os.path.join(dir_name,'../dataset/'))
+sys.path.insert(1, os.path.join(dir_name,'..'))
+sys.path.append(os.getcwd())
+print(sys.path)
 print(dir_name)
 
 import argparse
 import options
 ######### parser ###########
-opt = options.Options().init(argparse.ArgumentParser(description='Image motion deblurring')).parse_args()
+opt = options.Options().init(argparse.ArgumentParser(description='Image denoising')).parse_args()
 print(opt)
 
 import utils
-from dataset.dataset_motiondeblur import *
+from dataloader import get_dataloader # Replacing with custom dataloader import
 ######### Set GPUs ###########
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu
 import torch
 torch.backends.cudnn.benchmark = True
 
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# print(device)
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -42,11 +44,12 @@ from warmup_scheduler import GradualWarmupScheduler
 from torch.optim.lr_scheduler import StepLR
 from timm.utils import NativeScaler
 
+# from utils.loader import  get_training_data,get_validation_data
 
 
 
 ######### Logs dir ###########
-log_dir = os.path.join(opt.save_dir,'motiondeblur',opt.dataset, opt.arch+opt.env)
+log_dir = os.path.join(opt.save_dir, 'denoising', opt.dataset, opt.arch+opt.env)
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 logname = os.path.join(log_dir, datetime.datetime.now().isoformat()+'.txt') 
@@ -126,18 +129,15 @@ criterion = CharbonnierLoss().cuda()
 ######### DataLoader ###########
 print('===> Loading datasets')
 img_options_train = {'patch_size':opt.train_ps}
-train_dataset = get_training_data(opt.train_dir, img_options_train)
-train_loader = DataLoader(dataset=train_dataset, batch_size=opt.batch_size, shuffle=True, 
-        num_workers=opt.train_workers, pin_memory=False, drop_last=False)
+dataloader = get_dataloader(opt) # Using custom get_dataloader function
+train_loader = dataloader['train'] # Getting the 'train' part of custom dataloader
+        # num_workers=opt.train_workers, pin_memory=False, drop_last=False)
+# Skipping validation dataset creation as it's handled in custom dataloader
+val_loader = dataloader['val'] # Getting the 'val' part of custom dataloader
+        # num_workers=opt.eval_workers, pin_memory=False, drop_last=False)
 
-img_options_val = {'patch_size':opt.val_ps}
-val_dataset = get_validation_deblur_data(opt.val_dir, img_options_val)
-
-val_loader = DataLoader(dataset=val_dataset, batch_size=opt.batch_size, shuffle=False, 
-        num_workers=opt.eval_workers, pin_memory=False, drop_last=False)
-
-len_trainset = train_dataset.__len__()
-len_valset = val_dataset.__len__()
+len_trainset = train_loader.dataset.__len__()
+len_valset = val_loader.dataset.__len__()
 print("Sizeof training set: ", len_trainset,", sizeof validation set: ", len_valset)
 ######### validation ###########
 with torch.no_grad():
@@ -145,8 +145,8 @@ with torch.no_grad():
     psnr_dataset = []
     psnr_model_init = []
     for ii, data_val in enumerate((val_loader), 0):
-        target = data_val[0].cuda()
-        input_ = data_val[1].cuda()
+        target = data_val['cl_img'].cuda()
+        input_ = data_val['rn_img'].cuda()
         with torch.cuda.amp.autocast():
             restored = model_restoration(input_)
             restored = torch.clamp(restored,0,1)  
@@ -171,13 +171,15 @@ for epoch in range(start_epoch, opt.nepoch + 1):
     epoch_loss = 0
     train_id = 1
 
-    for i, data in enumerate(tqdm(train_loader), 0): 
+    for i, sample_batch in enumerate(tqdm(train_loader), 0): # Iterating through custom dataloader
         # zero_grad
         optimizer.zero_grad()
 
-        target = data[0].cuda()
-        input_ = data[1].cuda()
+        target = sample_batch['cl_img'].cuda() # Custom dataloader provides 'cl_img'
+        input_ = sample_batch['rn_img'].cuda() # Custom dataloader provides 'rn_img'
 
+        if epoch>5:
+            target, input_ = utils.MixUp_AUG().aug(target, input_)
         with torch.cuda.amp.autocast():
             restored = model_restoration(input_)
             loss = criterion(restored, target)
@@ -190,10 +192,9 @@ for epoch in range(start_epoch, opt.nepoch + 1):
             with torch.no_grad():
                 model_restoration.eval()
                 psnr_val_rgb = []
-                for ii, data_val in enumerate((val_loader), 0):
-                    target = data_val[0].cuda()
-                    input_ = data_val[1].cuda()
-                    filenames = data_val[2]
+                for ii, sample_batch in enumerate((val_loader), 0):
+                    target = sample_batch['cl_img'].cuda()
+                    input_ = sample_batch['rn_img'].cuda()
                     with torch.cuda.amp.autocast():
                         restored = model_restoration(input_)
                     restored = torch.clamp(restored,0,1)  

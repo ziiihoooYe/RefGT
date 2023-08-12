@@ -9,6 +9,10 @@
 /data/RainTrainL/
 /data/SPA-Data/
 /data/SPA-Data-test/
+/data/data_object/
+/data/leftImg8bit/
+/data/raw_data/
+/data/weather_datasets/
 #ignore result
 /save_result/
 /test_result/
@@ -23,3 +27,8 @@
 /data/DID-Data/
 # 基于编辑器的 HTTP 客户端请求
 /httpRequests/
+# cache
+/model/__pycache__/
+/data/__pycache__/
+/loss/__pycache__/
+/__pycache__/

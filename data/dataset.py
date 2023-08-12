@@ -250,12 +250,12 @@ class RainTrainL_val(derain_dataset):
 class SPAData(derain_dataset):
     def __init__(self, args, transform=transforms.Compose([ToTensor()])):
         super(SPAData, self).__init__(args)
-        rn_videos = sorted(os.listdir(os.path.join(args.dataset_dir, 'SPA-Data-test/train/real_world'))) # [video0, video1, ]
+        rn_videos = sorted(os.listdir(os.path.join(args.dataset_dir, 'SPA-Data/train/real_world'))) # [video0, video1, ]
         rn_dict = {}
         for video in rn_videos:
-            frames = os.listdir(os.path.join(args.dataset_dir, 'SPA-Data-test/train/real_world', video))
+            frames = os.listdir(os.path.join(args.dataset_dir, 'SPA-Data/train/real_world', video))
             for frame in frames:
-                imgs = glob.glob(os.path.join(args.dataset_dir, 'SPA-Data-test/train/real_world', video, frame, "*.png")) # [[video0-frame0-*idx], [video0-frame1-*idx], ]
+                imgs = glob.glob(os.path.join(args.dataset_dir, 'SPA-Data/train/real_world', video, frame, "*.png")) # [[video0-frame0-*idx], [video0-frame1-*idx], ]
                 idxs = [os.path.basename(img).split('_', 1)[-1].replace('.png' ,'') for img in imgs]
                 for idx, img in zip(idxs, imgs):
                     key_name = f"{video}-{idx}"
@@ -263,9 +263,9 @@ class SPAData(derain_dataset):
                         rn_dict[key_name] = []
                     rn_dict[key_name].append(img)
         self.rn_img = [rn_dict[key] for key in sorted(rn_dict.keys())] # [[video0-idx0-*frame], [video0-idx1-*frame], ]
-        self.cl_img = sorted([os.path.join(args.dataset_dir, 'SPA-Data-test/train/real_world_gt', video_name, name)
-                              for video_name in os.listdir(os.path.join(args.dataset_dir, 'SPA-Data-test/train/real_world_gt'))
-                              for name in os.listdir(os.path.join(args.dataset_dir, 'SPA-Data/train-test/real_world_gt', video_name))]) # [[video0-idx0], [video0-idx1], ]
+        self.cl_img = sorted([os.path.join(args.dataset_dir, 'SPA-Data/train/real_world_gt', video_name, name)
+                              for video_name in os.listdir(os.path.join(args.dataset_dir, 'SPA-Data/train/real_world_gt'))
+                              for name in os.listdir(os.path.join(args.dataset_dir, 'SPA-Data/train/real_world_gt', video_name))]) # [[video0-idx0], [video0-idx1], ]
         self.cl_img = [cl_img for cl_img in self.cl_img if self.is_pair(rn_dict=rn_dict, cl_img=cl_img)] # remove unpaired clean images
         assert len(self.rn_img) == len(self.cl_img), 'rainy data do not match clean data!' 
         # print('\n' + 'len(self.rn_img)=len(self.cl_img)=' + str(len(self.rn_img)) + '\n')
@@ -333,10 +333,7 @@ class SPAData(derain_dataset):
         rn_img, cl_img, _ = self.get_imgs_by_idx(idx)
         
         ref_idx = self.retrieve_ref(img=cl_img, img_hash=self.imghash)
-        # print('\n' + 'ref_idx: ' + str(ref_idx) + '\n')
         ref_frame_idx = random.randint(0, len(self.rn_ref[ref_idx])-1)
-        # print('\n' + 'len(rn_img[ref_idx])' + str(len(self.rn_ref[ref_idx])) + '\n')
-        # print('\n' + 'ref_frame_idx' + str(ref_frame_idx))
         cl_ref = self.cl_ref[ref_idx]
         rn_ref = self.rn_ref[ref_idx][ref_frame_idx]
 
@@ -361,7 +358,8 @@ class SPAData(derain_dataset):
         sample = {'cl_img': cl_img,
                   'rn_img': rn_img,
                   'cl_ref': cl_ref,
-                  'rn_ref': rn_ref}
+                  'rn_ref': rn_ref,
+                  }
 
         if self.transform:
             sample = self.transform(sample)

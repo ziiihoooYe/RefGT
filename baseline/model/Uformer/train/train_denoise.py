@@ -16,7 +16,7 @@ import options
 opt = options.Options().init(argparse.ArgumentParser(description='Image denoising')).parse_args()
 print(opt)
 
-import torch_utils
+import utils
 from dataset.dataset_denoise import *
 ######### Set GPUs ###########
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -55,8 +55,8 @@ logname = os.path.join(log_dir, datetime.datetime.now().isoformat()+'.txt')
 print("Now time is : ",datetime.datetime.now().isoformat())
 result_dir = os.path.join(log_dir, 'results')
 model_dir  = os.path.join(log_dir, 'models')
-torch_utils.mkdir(result_dir)
-torch_utils.mkdir(model_dir)
+utils.mkdir(result_dir)
+utils.mkdir(model_dir)
 
 # ######### Set Seeds ###########
 random.seed(1234)
@@ -65,7 +65,7 @@ torch.manual_seed(1234)
 torch.cuda.manual_seed_all(1234)
 
 ######### Model ###########
-model_restoration = torch_utils.get_arch(opt)
+model_restoration = utils.get_arch(opt)
 
 with open(logname,'a') as f:
     f.write(str(opt)+'\n')
@@ -103,9 +103,9 @@ else:
 if opt.resume: 
     path_chk_rest = opt.pretrain_weights 
     print("Resume from "+path_chk_rest)
-    torch_utils.load_checkpoint(model_restoration,path_chk_rest) 
-    start_epoch = torch_utils.load_start_epoch(path_chk_rest) + 1 
-    lr = torch_utils.load_optim(optimizer, path_chk_rest) 
+    utils.load_checkpoint(model_restoration,path_chk_rest) 
+    start_epoch = utils.load_start_epoch(path_chk_rest) + 1 
+    lr = utils.load_optim(optimizer, path_chk_rest) 
 
     # for p in optimizer.param_groups: p['lr'] = lr 
     # warmup = False 
@@ -149,8 +149,8 @@ with torch.no_grad():
         with torch.cuda.amp.autocast():
             restored = model_restoration(input_)
             restored = torch.clamp(restored,0,1)  
-        psnr_dataset.append(torch_utils.batch_PSNR(input_, target, False).item())
-        psnr_model_init.append(torch_utils.batch_PSNR(restored, target, False).item())
+        psnr_dataset.append(utils.batch_PSNR(input_, target, False).item())
+        psnr_model_init.append(utils.batch_PSNR(restored, target, False).item())
     psnr_dataset = sum(psnr_dataset)/len_valset
     psnr_model_init = sum(psnr_model_init)/len_valset
     print('Input & GT (PSNR) -->%.4f dB'%(psnr_dataset), ', Model_init & GT (PSNR) -->%.4f dB'%(psnr_model_init))
@@ -178,7 +178,7 @@ for epoch in range(start_epoch, opt.nepoch + 1):
         input_ = data[1].cuda()
 
         if epoch>5:
-            target, input_ = torch_utils.MixUp_AUG().aug(target, input_)
+            target, input_ = utils.MixUp_AUG().aug(target, input_)
         with torch.cuda.amp.autocast():
             restored = model_restoration(input_)
             loss = criterion(restored, target)
@@ -198,7 +198,7 @@ for epoch in range(start_epoch, opt.nepoch + 1):
                     with torch.cuda.amp.autocast():
                         restored = model_restoration(input_)
                     restored = torch.clamp(restored,0,1)  
-                    psnr_val_rgb.append(torch_utils.batch_PSNR(restored, target, False).item())
+                    psnr_val_rgb.append(utils.batch_PSNR(restored, target, False).item())
 
                 psnr_val_rgb = sum(psnr_val_rgb)/len_valset
                 
