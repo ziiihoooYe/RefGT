@@ -333,10 +333,7 @@ class SPAData(derain_dataset):
         rn_img, cl_img, _ = self.get_imgs_by_idx(idx)
         
         ref_idx = self.retrieve_ref(img=cl_img, img_hash=self.imghash)
-        # print('\n' + 'ref_idx: ' + str(ref_idx) + '\n')
         ref_frame_idx = random.randint(0, len(self.rn_ref[ref_idx])-1)
-        # print('\n' + 'len(rn_img[ref_idx])' + str(len(self.rn_ref[ref_idx])) + '\n')
-        # print('\n' + 'ref_frame_idx' + str(ref_frame_idx))
         cl_ref = self.cl_ref[ref_idx]
         rn_ref = self.rn_ref[ref_idx][ref_frame_idx]
 
@@ -361,7 +358,8 @@ class SPAData(derain_dataset):
         sample = {'cl_img': cl_img,
                   'rn_img': rn_img,
                   'cl_ref': cl_ref,
-                  'rn_ref': rn_ref}
+                  'rn_ref': rn_ref,
+                  }
 
         if self.transform:
             sample = self.transform(sample)

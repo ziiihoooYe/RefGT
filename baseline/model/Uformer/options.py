@@ -7,17 +7,16 @@ class Options():
 
     def init(self, parser):        
         # global settings
-        parser.add_argument('--batch_size', type=int, default=32, help='batch size')
+        parser.add_argument('--batch_size', type=int, default=8, help='batch size')
         parser.add_argument('--nepoch', type=int, default=250, help='training epochs')
         parser.add_argument('--train_workers', type=int, default=4, help='train_dataloader workers')
         parser.add_argument('--eval_workers', type=int, default=4, help='eval_dataloader workers')
-        parser.add_argument('--dataset', type=str, default ='SIDD')
         parser.add_argument('--pretrain_weights',type=str, default='./log/Uformer_B/models/model_best.pth', help='path of pretrained_weights')
         parser.add_argument('--optimizer', type=str, default ='adamw', help='optimizer for training')
         parser.add_argument('--lr_initial', type=float, default=0.0002, help='initial learning rate')
         parser.add_argument('--step_lr', type=int, default=50, help='weight decay')
         parser.add_argument('--weight_decay', type=float, default=0.02, help='weight decay')
-        parser.add_argument('--gpu', type=str, default='6,7', help='GPUs')
+        parser.add_argument('--gpu', type=str, default='0,1,2,3,4,5,6,7', help='GPUs')
         parser.add_argument('--arch', type=str, default ='Uformer_B',  help='archtechture')
         parser.add_argument('--mode', type=str, default ='denoising',  help='image restoration mode')
         parser.add_argument('--dd_in', type=int, default=3, help='dd_in')
@@ -60,4 +59,13 @@ class Options():
         parser.add_argument("--local_rank", type=int,default=-1,help='DDP parameter, do not modify')#不需要赋值，启动命令 torch.distributed.launch会自动赋值
         parser.add_argument("--distribute",action='store_true',help='whether using multi gpu train')
         parser.add_argument("--distribute_mode",type=str,default='DDP',help="using which mode to ")
+        
+        #datatloader 
+        ### dataset setting
+        parser.add_argument('--dataset', type=str, default='BDD100K',help='Which dataset to train and test')
+        parser.add_argument('--dataset_dir', type=str, default='data',help='Directory of dataset')
+
+        ### dataloader setting
+        parser.add_argument('--num_workers', type=int, default=0,help='The number of workers when loading data')
+        
         return parser

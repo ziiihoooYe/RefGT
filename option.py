@@ -46,7 +46,7 @@ parser.add_argument('--baseline', type=str, default='PReNet',
                     help='baseline name')
 parser.add_argument('--baseline_module', type=str, default='baseline.model.PReNet.networks',
                     help='baseline model directory')
-parser.add_argument('--baseline_state_dir', type=str, default='baseline/state_dict/PReNet6/BDD100K/net_latest.pth',                   
+parser.add_argument('--baseline_state_dir', type=str, default='baseline/state_dict/PReNet6/SPA-Data/net_latest.pth',                   
                     help='baseline state dic')
 
 ### optimizer setting
