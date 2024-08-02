@@ -34,10 +34,10 @@ To test the model, run the following script with the specified options:
 
 ```
 torchrun --standalone --nproc_per_node=8 \
-		 main.py --baseline=PReNet --baseline_module=baseline.model.PReNet.networks \
-		 --test=True --batch_size=8 \
-		 --save_dir=test --baseline_state_dir=${baseline_state_dir} \
-		 --dataset=BDD100K --model_path=${model_path}$
+	 main.py --baseline=PReNet --baseline_module=baseline.model.PReNet.networks \
+	 --test=True --batch_size=8 \
+	 --save_dir=test --baseline_state_dir=${baseline_state_dir} \
+	 --dataset=BDD100K --model_path=${model_path}$
 ```
 
 
@@ -49,10 +49,10 @@ To train the model, run the following script with the specified options:
 
 ```
 torchrun --standalone --nproc_per_node=8 \
-		 main.py --baseline=PReNet --baseline_module=baseline.model.PReNet.networks \
-		 --gt_init_epochs=10 --batch_size=8 \
-		 --dataset=BDD100K  \
-		 --baseline_state_dir=${baseline_state_dir}
+	 main.py --baseline=PReNet --baseline_module=baseline.model.PReNet.networks \
+	 --gt_init_epochs=10 --batch_size=8 \
+	 --dataset=BDD100K  \
+	 --baseline_state_dir=${baseline_state_dir}
 ```
 
 
