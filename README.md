@@ -21,8 +21,8 @@ The datasets used in this project are derived from an original autonomous drivin
 - [KITTI_Rain](https://1drv.ms/f/s!AhiCmYWu9pBrifMLdsmGLt4UQMj-8g?e=ogzi0l) [3]
 
 ### Pre-Trained Model
-- PreNet [4]
-- Uformer[5]
+- [PreNet](https://1drv.ms/f/s!AhiCmYWu9pBrjMNzjMsryxmTdcE9Pg?e=OT0VdC) [4]
+- [Uformer](https://1drv.ms/f/s!AhiCmYWu9pBrjMN1V8M4u1pzWrpOhQ?e=Dmb1tW) [5]
 ### Testing
 To test the model, run the following script with the specified options:
 - `--standalone`: Use a single node.
@@ -43,9 +43,9 @@ torchrun --standalone --nproc_per_node=8 \
 
 ### Train
 To train the model, run the following script with the specified options:
-- `--standalone`: single node
-- `--nproc_per_node=8`: 8 GPU
-- `--baseline_state_dir=${baseline_state_dir}`: baseline model path
+- `--standalone`: Use a single node
+- `--nproc_per_node=8`: Utilize 8 GPU
+- `--baseline_state_dir=${baseline_state_dir}`: Path to baseline model
 
 ```
 torchrun --standalone --nproc_per_node=8 \
