@@ -10,7 +10,7 @@ Image de-raining is a critical task in computer vision to improve visibility and
 
 install requirements package:
 ```
-pip install -r requirement .txt
+pip install -r requirement.txt
 ```
 
 ### Datasets
